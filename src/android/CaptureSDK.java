@@ -23,8 +23,9 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.util.Log;
 
+import com.socketmobile.capture.android.Capture;
 
-
+/*
 AppKey appkey = new AppKey("<my appkey>", "<my app id>", "<my developer id>");
 CaptureClient client = new CaptureClient(appkey);
 client.setListener(mListener);
@@ -81,7 +82,7 @@ public void onData(DataEvent event) {
     String data = event.getData().getString();
     // do something
 }
-
+*/
 
 /**
  * This class echoes a string called from JavaScript.
