@@ -9,10 +9,6 @@ dependencies {
     compile 'com.socketmobile:capture:1.0-rc1'
 }
 
-dependencies {
-   compile(name:'capture-android-1.0.0', ext:'aar')
-}
-
 android {
   packagingOptions {
     exclude 'META-INF/NOTICE'
