@@ -23,6 +23,7 @@
 			<uses-permission android:name="android.permission.BLUETOOTH" />
 		</config-file>		
 		<framework src="src/android/capture-android.gradle" custom="true" type="gradleReference" />		    	
+		<framework src ="org.greenrobot:eventbus:3.1.1"/>
   	</platform>
 	<platform name="ios">
 		<config-file target="config.xml" parent="/*">

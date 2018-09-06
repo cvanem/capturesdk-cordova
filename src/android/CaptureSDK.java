@@ -33,6 +33,7 @@ import com.socketmobile.capture.client.ConnectionState;
 import com.socketmobile.capture.android.events.ConnectionStateEvent;
 import com.socketmobile.capture.client.CaptureClient;
 import com.socketmobile.capture.CaptureError;
+//import de.greenrobot.event.Subscribe;
 
 /*
 AppKey appkey = new AppKey("<my appkey>", "<my app id>", "<my developer id>");
