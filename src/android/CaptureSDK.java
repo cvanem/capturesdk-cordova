@@ -30,8 +30,6 @@ public class CaptureSDK extends CordovaPlugin {
 
     private CallbackContext _callbackContext = null;
     String strInterface;
-    private StarIoExtManager starIoExtManager;
-
 
     /**
      * Executes the request and returns PluginResult.
