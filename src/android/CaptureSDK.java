@@ -205,7 +205,18 @@ public class CaptureSDK extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 
-        if (action.equals("checkStatus")) {
+
+        if (action.equals("registerCallback")) {            
+            this._callbackContext = callbackContext;
+            return true;
+        }
+        else if (action.equals("testCallback")) {
+            JSONObject result = new JSONObject();
+            result.put("testCallback","Success!");
+            this._callbackContext.success(result);            
+            return true;
+        }
+        else if (action.equals("checkStatus")) {
             String portName = args.getString(0);
             String portSettings = args.getString(1);
             this.checkStatus(portName, portSettings, callbackContext);
