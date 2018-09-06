@@ -1,8 +1,7 @@
-package starprnt.cordova;
+package capturesdk.cordova;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
-
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -13,51 +12,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
-import com.starmicronics.stario.PortInfo;
-import com.starmicronics.stario.StarIOPort;
-import com.starmicronics.stario.StarIOPortException;
-import com.starmicronics.stario.StarPrinterStatus;
-import com.starmicronics.starioextension.IConnectionCallback;
-import com.starmicronics.starioextension.StarIoExt;
-import com.starmicronics.starioextension.StarIoExt.Emulation;
-import com.starmicronics.starioextension.ICommandBuilder;
-import com.starmicronics.starioextension.ICommandBuilder.CutPaperAction;
-import com.starmicronics.starioextension.ICommandBuilder.CodePageType;
-import com.starmicronics.starioextension.StarIoExtManager;
-import com.starmicronics.starioextension.StarIoExtManagerListener;
-
-
 import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
-import android.content.ContentResolver;
-import android.net.Uri;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.Typeface;
-import android.provider.MediaStore;
 import android.telephony.IccOpenLogicalChannelResponse;
 import android.text.Layout;
 import android.text.StaticLayout;
-import android.text.TextPaint;
 import android.util.Log;
-import android.util.Base64;
-
-
 
 /**
  * This class echoes a string called from JavaScript.
  */
-public class StarPRNT extends CordovaPlugin {
-
+public class CaptureSDK extends CordovaPlugin {
 
     private CallbackContext _callbackContext = null;
     String strInterface;
@@ -77,72 +46,9 @@ public class StarPRNT extends CordovaPlugin {
 
         if (action.equals("checkStatus")) {
             String portName = args.getString(0);
-            String portSettings = getPortSettingsOption(portName, args.getString(1));
+            String portSettings = args.getString(1);
             this.checkStatus(portName, portSettings, callbackContext);
             return true;
-        }else if (action.equals("portDiscovery")) {
-            String port = args.getString(0);
-            this.portDiscovery(port, callbackContext);
-            return true;
-        }else if (action.equals("printRasterReceipt")) {
-            String portName = args.getString(0);
-            String portSettings = getPortSettingsOption(portName, args.getString(1));
-            Emulation emulation = getEmulation(args.getString(1));
-            String printObj = args.getString(2);
-            this.printRasterReceipt(portName, portSettings, emulation, printObj, callbackContext);
-            return true;
-        }else if (action.equals("printBase64Image")) {
-            String portName = args.getString(0);
-            String portSettings = getPortSettingsOption(portName, args.getString(1));
-            Emulation emulation = getEmulation(args.getString(1));
-            String printObj = args.getString(2);
-            this.printBase64Image(portName, portSettings, emulation, printObj, callbackContext);
-            return true;
-
-        }
-        else if (action.equals("printRawText")){
-            String portName = args.getString(0);
-            String portSettings = getPortSettingsOption(portName, args.getString(1));
-            Emulation emulation = getEmulation(args.getString(1));
-            String printObj = args.getString(2);
-
-            this.printRawText(portName, portSettings, emulation, printObj, callbackContext);
-            return true;
-        }else if (action.equals("printRasterData")){
-        String portName = args.getString(0);
-        String portSettings = getPortSettingsOption(portName, args.getString(1));
-        Emulation emulation = getEmulation(args.getString(1));
-        String printObj = args.getString(2);
-
-            try {
-                this.printRasterData(portName, portSettings, emulation, printObj, callbackContext);
-            } catch (IOException e) {
-               // e.printStackTrace();
-            }
-            return true;
-    }else if (action.equals("print")){
-        String portName = args.getString(0);
-        String portSettings = getPortSettingsOption(portName, args.getString(1));
-        Emulation emulation = getEmulation(args.getString(1));
-        JSONArray printCommands = args.getJSONArray(2);
-        this.print(portName, portSettings, emulation, printCommands, callbackContext);
-        return true;
-    }else if (action.equals("openCashDrawer")){
-        String portName = args.getString(0);
-        String portSettings = getPortSettingsOption(portName, args.getString(1));
-        Emulation emulation = getEmulation(args.getString(1));
-        this.openCashDrawer(portName, portSettings, emulation, callbackContext);
-        return true;
-    } else if (action.equals("connect")){
-        String portName = args.getString(0);
-        String portSettings = getPortSettingsOption(portName, args.getString(1)); //get port settings using emulation parameter
-        Boolean hasBarcodeReader = args.getBoolean(2);
-        _callbackContext = callbackContext;
-        this.connect(portName, portSettings, hasBarcodeReader, callbackContext);
-        return true;
-    }else if (action.equals("disconnect")){
-        this.disconnect(callbackContext);
-        return true;
         }
         return false;
     }
@@ -160,7 +66,7 @@ public class StarPRNT extends CordovaPlugin {
                 .execute(new Runnable() {
                     public void run() {
 
-                        StarIOPort port = null;
+                        /*StarIOPort port = null;
                         try {
 
                             port = StarIOPort.getPort(_portName, _portSettings, 10000, context);
@@ -205,6 +111,7 @@ public class StarPRNT extends CordovaPlugin {
                             }
 
                         }
+                        */
 
                     }
                 });
