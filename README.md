@@ -3,13 +3,26 @@ Cordova plugin for Socket Mobile Capture SDK
 
 ***Currently under development ****
 
+git clone https://cvanem/capturesdk-cordova
+
+
 Example using cordova-plugin-inappbrowser:
 
-In the example directory run:
+Prerequisites:
+    
+    yarn
+    node
+    npm
+    cordova (npm install -g cordova)
+    Android tools: Android Studio/android sdk/jdk
 
-yarn build
+Open command prompot and navigate to the /examples directory and run the commands:
 
-yarn android
+    yarn install
+    yarn clean (Only needed if the examples/inappbrowser directory exists and you want to run yarn build)
+    yarn build (creates the cordova project and configures all plugins and the android platform)
+    yarn android (compiles and runs the android app on a usb connected device or open emulator)
+
 
 Insert your APP_KEY and DEVELOPER_ID into the plugin.xml file.  Here is the section in the plugin.xml file you need to update:
 
@@ -20,4 +33,4 @@ Insert your APP_KEY and DEVELOPER_ID into the plugin.xml file.  Here is the sect
         </config-file>
     </platform>
 
-This needs to be done before adding the plugin
+This currently needs to be done in the public repo before running the yarn build example.  If you need to change this you will need to either change the https://github.com/cvanem/capturesdk-cordova repository before running yarn build or you can update the androidmanifest.xml manually after running yarn build but before running yarn android.
