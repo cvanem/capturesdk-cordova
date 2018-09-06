@@ -25,6 +25,15 @@ import android.util.Log;
 
 import com.socketmobile.capture.android.Capture;
 
+import com.socketmobile.capture.client.DeviceClient;
+import com.socketmobile.capture.client.DataEvent;
+import com.socketmobile.capture.client.DeviceStateEvent;
+import com.socketmobile.capture.client.DeviceState;
+import com.socketmobile.capture.client.ConnectionState;
+import com.socketmobile.capture.android.events.ConnectionStateEvent;
+import com.socketmobile.capture.client.CaptureClient;
+import com.socketmobile.capture.CaptureError;
+
 /*
 AppKey appkey = new AppKey("<my appkey>", "<my app id>", "<my developer id>");
 CaptureClient client = new CaptureClient(appkey);
@@ -87,11 +96,108 @@ public void onData(DataEvent event) {
 /**
  * This class echoes a string called from JavaScript.
  */
+
+
+ 
 public class CaptureSDK extends CordovaPlugin {
+    //@Override
+    protected void onCreate() {
+        //super.onCreate(savedInstanceState);
+        //setContentView(R.layout.activity_main);
+        Capture.builder(this.cordova.getActivity())
+        //.enableLogging(BuildConfig.DEBUG)
+        .build();
+    }
+    
+    //@Subscribe(threadMode = ThreadMode.MAIN)
+    public void onData(DataEvent event) {
+        DeviceClient device = event.getDevice();
+        String data = event.getData().getString();
+        // Do something
+    }
+
+    //@Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void onCaptureDeviceStateChange(DeviceStateEvent event) {
+        DeviceClient device = event.getDevice();
+        DeviceState state = event.getState();
+
+        switch(state.intValue()) {
+            case DeviceState.READY:
+            // Ready to use
+            break;
+            default:
+            // Device not ready for use
+        }
+    }
+    
+    //@Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void onCaptureServiceConnectionStateChange(ConnectionStateEvent event) {
+        ConnectionState state = event.getState();
+        CaptureClient client = event.getClient();
+        
+        if (state.hasError()) {
+            CaptureError error = state.getError();
+            switch(error.getCode()) {
+                case CaptureError.COMPANION_NOT_INSTALLED:
+                /*
+                alert("Socket Mobile Companion must be installed to use your scanner") {
+                    positiveButton("Install") { // onClick
+                        Capture.installCompanion(this.cordova.getActivity())
+                    }
+                }
+                */
+                break;
+                case CaptureError.SERVICE_NOT_RUNNING:
+                if (state.isDisconnected()) {
+                    if (Capture.notRestartedRecently()) {
+                        //Capture.restart(this);
+                    } else {
+                        // Service keeps crashing - Reboot the host device and check for updates to Companion
+                    }
+                }
+                break;
+                case CaptureError.BLUETOOTH_NOT_ENABLED:
+                /*alert("Bluetooth must be enabled to use your scanner") {
+                    positiveButton("Enable") { // onClick
+                        // BLUETOOTH permission must be enabled in your AndroidManifest
+                        startActivity(Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE));
+                    }
+                }
+                */
+                break;
+            }
+        }
+        
+        switch(state.intValue()) {
+            case ConnectionState.CONNECTING:
+            // ...
+            break;
+            case ConnectionState.CONNECTED:
+            // ...
+            break;
+            case ConnectionState.READY:
+            // ...
+            break;
+            case ConnectionState.DISCONNECTING:
+            // ...
+            break;
+            case ConnectionState.DISCONNECTED:
+            // ...
+            break;
+        }
+    }
 
     private CallbackContext _callbackContext = null;
     String strInterface;
-
+/*
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public onData(DataEvent event) {
+        DeviceClient device = event.getDevice();
+        String data = event.getData().getString();
+        // Do something
+    }
+*/
+    //private Capture.CaptureClient client;
     /**
      * Executes the request and returns PluginResult.
      *
