@@ -33,6 +33,9 @@ import com.socketmobile.capture.client.ConnectionState;
 import com.socketmobile.capture.android.events.ConnectionStateEvent;
 import com.socketmobile.capture.client.CaptureClient;
 import com.socketmobile.capture.CaptureError;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 //import de.greenrobot.event.Subscribe;
 
 /*
@@ -99,43 +102,43 @@ public void onData(DataEvent event) {
  */
 
 
- 
+
 public class CaptureSDK extends CordovaPlugin {
     //@Override
     protected void onCreate() {
         //super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
         Capture.builder(this.cordova.getActivity())
-        //.enableLogging(BuildConfig.DEBUG)
-        .build();
+                //.enableLogging(BuildConfig.DEBUG)
+                .build();
     }
-    
-    //@Subscribe(threadMode = ThreadMode.MAIN)
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onData(DataEvent event) {
         DeviceClient device = event.getDevice();
         String data = event.getData().getString();
         // Do something
     }
 
-    //@Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onCaptureDeviceStateChange(DeviceStateEvent event) {
         DeviceClient device = event.getDevice();
         DeviceState state = event.getState();
 
         switch(state.intValue()) {
             case DeviceState.READY:
-            // Ready to use
-            break;
+                // Ready to use
+                break;
             default:
-            // Device not ready for use
+                // Device not ready for use
         }
     }
-    
-    //@Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onCaptureServiceConnectionStateChange(ConnectionStateEvent event) {
         ConnectionState state = event.getState();
         CaptureClient client = event.getClient();
-        
+
         if (state.hasError()) {
             CaptureError error = state.getError();
             switch(error.getCode()) {
@@ -147,16 +150,16 @@ public class CaptureSDK extends CordovaPlugin {
                     }
                 }
                 */
-                break;
+                    break;
                 case CaptureError.SERVICE_NOT_RUNNING:
-                if (state.isDisconnected()) {
-                    if (Capture.notRestartedRecently()) {
-                        //Capture.restart(this);
-                    } else {
-                        // Service keeps crashing - Reboot the host device and check for updates to Companion
+                    if (state.isDisconnected()) {
+                        if (Capture.notRestartedRecently()) {
+                            //Capture.restart(this);
+                        } else {
+                            // Service keeps crashing - Reboot the host device and check for updates to Companion
+                        }
                     }
-                }
-                break;
+                    break;
                 case CaptureError.BLUETOOTH_NOT_ENABLED:
                 /*alert("Bluetooth must be enabled to use your scanner") {
                     positiveButton("Enable") { // onClick
@@ -165,40 +168,32 @@ public class CaptureSDK extends CordovaPlugin {
                     }
                 }
                 */
-                break;
+                    break;
             }
         }
-        
+
         switch(state.intValue()) {
             case ConnectionState.CONNECTING:
-            // ...
-            break;
+                // ...
+                break;
             case ConnectionState.CONNECTED:
-            // ...
-            break;
+                // ...
+                break;
             case ConnectionState.READY:
-            // ...
-            break;
+                // ...
+                break;
             case ConnectionState.DISCONNECTING:
-            // ...
-            break;
+                // ...
+                break;
             case ConnectionState.DISCONNECTED:
-            // ...
-            break;
+                // ...
+                break;
         }
     }
 
     private CallbackContext _callbackContext = null;
     String strInterface;
-/*
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public onData(DataEvent event) {
-        DeviceClient device = event.getDevice();
-        String data = event.getData().getString();
-        // Do something
-    }
-*/
-    //private Capture.CaptureClient client;
+
     /**
      * Executes the request and returns PluginResult.
      *
@@ -218,7 +213,6 @@ public class CaptureSDK extends CordovaPlugin {
         }
         return false;
     }
-
 
     public void checkStatus(String portName, String portSettings, CallbackContext callbackContext) {
 
