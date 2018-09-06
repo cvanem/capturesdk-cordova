@@ -1,0 +1,31 @@
+{
+    "name": "cordova-plugin-starprnt",
+    "version": "2.2.0",
+    "description": "StarPRNT Cordova Plugin for Star Micronics Bluetooth/LAN printers",
+    "types": "./types/index.d.ts",
+    "cordova": {
+      "id": "cordova-plugin-starprnt",
+      "platforms": [
+        "android",
+        "ios"
+      ]
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/auctifera-josed/starprnt"
+    },
+    "keywords": [
+      "cordova",
+      "startPRNT",
+      "ecosystem:cordova",
+      "cordova-ios",
+      "cordova-android"
+    ],
+    "license": "MIT",
+    "scripts": {
+      "test": "npm run jshint",
+      "jshint": "node node_modules/jshint/bin/jshint www && node node_modules/jshint/bin/jshint src && node node_modules/jshint/bin/jshint tests"
+    },
+    "author": "Jose Angarita / Ruben Casas"
+    
+  }
