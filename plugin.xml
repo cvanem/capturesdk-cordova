@@ -22,9 +22,9 @@
 		<config-file target="AndroidManifest.xml" parent="/*" />
 		<config-file target="AndroidManifest.xml" parent="/manifest">
 			<uses-permission android:name="android.permission.BLUETOOTH" />
-		</config-file>		
+		</config-file>
 		<framework src="com.socketmobile:capture:1.0.0"/>
-		<lib-file src="src/android/libs/capture-android-1.0.0.jar"/>
+		<lib-file src="src/android/lib/capture-android-1.0.0.jar"/>
   	</platform>
 	<platform name="ios">
 		<config-file target="config.xml" parent="/*">
