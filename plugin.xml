@@ -24,7 +24,9 @@
 			<uses-permission android:name="android.permission.BLUETOOTH" />
 		</config-file>
 		<framework src="com.socketmobile:capture:1.0.0"/>
-		<lib-file src="src/android/lib/capture-android-1.0.0.jar"/>
+		<lib-file src="src/android/lib/capture-1.0.0.jar"/>
+		<framework src="com.socketmobile:capture-common:1.0.0"/>
+		<lib-file src="src/android/lib/capture-common-1.0.0.jar"/>		
   	</platform>
 	<platform name="ios">
 		<config-file target="config.xml" parent="/*">
