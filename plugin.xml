@@ -24,7 +24,7 @@
 		</config-file>		
 		
         <config-file parent="./application" target="AndroidManifest.xml">
-	    	<meta-data android:name="com.capturesdk.cordova.APP_KEY" android:value="MC0CFHc4jhssCXc8FljtHDgOeiV3YZJjAhUAgu+FTZgrAjpFyEOcBnVfWzrs1LA="/>
+	    	<meta-data android:name="com.socketmobile.capture.APP_KEY" android:value="MC0CFHc4jhssCXc8FljtHDgOeiV3YZJjAhUAgu+FTZgrAjpFyEOcBnVfWzrs1LA="/>
 	    	<meta-data android:name="com.socketmobile.capture.DEVELOPER_ID" android:value="43d33419-e8e6-4ec6-a1f2-c8f9e6b960c8"/>
         </config-file>
 
