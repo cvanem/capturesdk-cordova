@@ -191,7 +191,8 @@ public class CaptureSDK extends CordovaPlugin {
         }
     }
 
-    private CallbackContext _callbackContext = null;
+    public static CallbackContext _callbackContext = null;
+    public static CallbackContext onDataContext=null;
     String strInterface;
 
     /**
@@ -202,89 +203,56 @@ public class CaptureSDK extends CordovaPlugin {
      * @param callbackContext   The callback id used when calling back into JavaScript.
      * @return                  True if the action was valid, false otherwise.
      */
-    @Override
+
+     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-
-
-        if (action.equals("registerCallback")) {            
-            this._callbackContext = callbackContext;
-            return true;
+        // Execute an asynchronous task
+        if(action.equals("registerOnDataCallback")) {
+            onDataContext = callbackContext; //register the callback
+            cordova.getThreadPool().execute(new Runnable() {
+                public void run() {
+                    // Then you're allowed to execute more than twice a callback.
+                    PluginResult resultA = new PluginResult(PluginResult.Status.OK, "myfirstJSONResponse");
+                    resultA.setKeepCallback(true);
+                    onDataContext.sendPluginResult(resultA);
+        
+                    // Some more code
+        
+                    Boolean something = true;
+        
+                    // bla bla bla code
+        
+        
+                    PluginResult resultB = new PluginResult(PluginResult.Status.OK, "secondJSONResponse");
+                    resultB.setKeepCallback(true);
+                    onDataContext.sendPluginResult(resultB);       
+                }
+            });
+            PluginResult pluginResult = new  PluginResult(PluginResult.Status.NO_RESULT); 
+            pluginResult.setKeepCallback(true); // Keep callback            
+        } else if(action.equals("testOnDataCallback")) {            
+            cordova.getThreadPool().execute(new Runnable() {
+                public void run() {
+                    // Then you're allowed to execute more than twice a callback.
+                    PluginResult resultA = new PluginResult(PluginResult.Status.OK, "myfirstTestJSONResponse");
+                    resultA.setKeepCallback(true);
+                    onDataContext.sendPluginResult(resultA);
+        
+                    // Some more code
+        
+                    Boolean something = true;
+        
+                    // bla bla bla code
+        
+        
+                    PluginResult resultB = new PluginResult(PluginResult.Status.OK, "secondTestJSONResponse");
+                    resultB.setKeepCallback(true);
+                    onDataContext.sendPluginResult(resultB);       
+                }
+            });
+            PluginResult pluginResult = new  PluginResult(PluginResult.Status.NO_RESULT); 
+            pluginResult.setKeepCallback(true); // Keep callback            
         }
-        else if (action.equals("testCallback")) {
-            JSONObject result = new JSONObject();
-            result.put("testCallback","Success!");
-            this._callbackContext.success(result);            
-            return true;
-        }
-        else if (action.equals("checkStatus")) {
-            String portName = args.getString(0);
-            String portSettings = args.getString(1);
-            this.checkStatus(portName, portSettings, callbackContext);
-            return true;
-        }
-        return false;
-    }
-
-    public void checkStatus(String portName, String portSettings, CallbackContext callbackContext) {
-
-        final Context context = this.cordova.getActivity();
-        final CallbackContext _callbackContext = callbackContext;
-
-        final String _portName = portName;
-        final String _portSettings = portSettings;
-
-        cordova.getThreadPool()
-                .execute(new Runnable() {
-                    public void run() {
-
-                        /*StarIOPort port = null;
-                        try {
-
-                            port = StarIOPort.getPort(_portName, _portSettings, 10000, context);
-
-                            // A sleep is used to get time for the socket to completely open
-                            try {
-                                Thread.sleep(500);
-                            } catch (InterruptedException e) {
-                            }
-
-                            StarPrinterStatus status;
-                            Map<String, String> firmwareInformationMap = port.getFirmwareInformation();
-                            status = port.retreiveStatus();
-
-
-                            JSONObject json = new JSONObject();
-                            try {
-                                json.put("offline", status.offline);
-                                json.put("coverOpen", status.coverOpen);
-                                json.put("cutterError", status.cutterError);
-                                json.put("receiptPaperEmpty", status.receiptPaperEmpty);
-                                json.put("ModelName", firmwareInformationMap.get("ModelName"));
-                                json.put("FirmwareVersion", firmwareInformationMap.get("FirmwareVersion"));
-                            } catch (JSONException ex) {
-
-                            } finally {
-                                _callbackContext.success(json);
-                            }
-
-
-                        } catch (StarIOPortException e) {
-                            _callbackContext.error("Failed to connect to printer :" + e.getMessage());
-                        } finally {
-
-                            if (port != null) {
-                                try {
-
-                                    StarIOPort.releasePort(port);
-                                } catch (StarIOPortException e) {
-                                    _callbackContext.error("Failed to connect to printer" + e.getMessage());
-                                }
-                            }
-
-                        }
-                        */
-
-                    }
-                });
+        return true;
     }
 }
