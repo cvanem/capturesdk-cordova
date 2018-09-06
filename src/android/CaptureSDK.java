@@ -33,9 +33,12 @@ import com.socketmobile.capture.client.ConnectionState;
 import com.socketmobile.capture.android.events.ConnectionStateEvent;
 import com.socketmobile.capture.client.CaptureClient;
 import com.socketmobile.capture.CaptureError;
+import com.socketmobile.capture.AppKey;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import com.capturesdk.cordova.BuildConfig;
 //import de.greenrobot.event.Subscribe;
 
 /*
@@ -104,24 +107,62 @@ public void onData(DataEvent event) {
 
 
 public class CaptureSDK extends CordovaPlugin {
+
+    public static CallbackContext _callbackContext = null;
+    public static CallbackContext onDataContext=null;
+    public static AppKey appkey = null;
+    public static CaptureClient client = null;
+    String strInterface;
     //@Override
     protected void onCreate() {
+        /*
+        System.out.println("-------------------------------onCreate");
+        appkey = new AppKey("MC0CFHc4jhssCXc8FljtHDgOeiV3YZJjAhUAgu+FTZgrAjpFyEOcBnVfWzrs1LA=","android:com.capturesdk.cordova","43d33419-e8e6-4ec6-a1f2-c8f9e6b960c8"); 
+        client = new CaptureClient(appkey);
+        System.out.println("-------------------------------set appkey and client");
         //super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
-        Capture.builder(this.cordova.getActivity())
-                //.enableLogging(BuildConfig.DEBUG)
-                .build();
+        
+        Capture.builder(this.cordova.getActivity().getApplicationContext())
+             .enableLogging(BuildConfig.DEBUG)
+            .build();
+            */
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Subscribe(threadMode = ThreadMode.ASYNC)
     public void onData(DataEvent event) {
+        System.out.println("-------------------------------onData");
         DeviceClient device = event.getDevice();
         String data = event.getData().getString();
         // Do something
+
+        cordova.getThreadPool().execute(new Runnable() {
+            public void run() {                
+                // Then you're allowed to execute more than twice a callback.
+                PluginResult resultA = new PluginResult(PluginResult.Status.OK, "myfirstJSONResponse");
+                resultA.setKeepCallback(true);
+                onDataContext.sendPluginResult(resultA);
+    
+                // Some more code
+    
+                Boolean something = true;
+    
+                // bla bla bla code
+    
+    
+                PluginResult resultB = new PluginResult(PluginResult.Status.OK, "secondJSONResponse");
+                resultB.setKeepCallback(true);
+                onDataContext.sendPluginResult(resultB);       
+            }
+        });
+        PluginResult pluginResult = new  PluginResult(PluginResult.Status.NO_RESULT); 
+        pluginResult.setKeepCallback(true); // Keep callback
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onCaptureDeviceStateChange(DeviceStateEvent event) {
+        System.out.println("-------------------------------onCaptureDeviceStateChange");
         DeviceClient device = event.getDevice();
         DeviceState state = event.getState();
 
@@ -136,6 +177,7 @@ public class CaptureSDK extends CordovaPlugin {
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onCaptureServiceConnectionStateChange(ConnectionStateEvent event) {
+        System.out.println("-------------------------------onCaptureServiceConnectionStateChange");
         ConnectionState state = event.getState();
         CaptureClient client = event.getClient();
 
@@ -191,9 +233,7 @@ public class CaptureSDK extends CordovaPlugin {
         }
     }
 
-    public static CallbackContext _callbackContext = null;
-    public static CallbackContext onDataContext=null;
-    String strInterface;
+    
 
     /**
      * Executes the request and returns PluginResult.
@@ -204,37 +244,36 @@ public class CaptureSDK extends CordovaPlugin {
      * @return                  True if the action was valid, false otherwise.
      */
 
-     /*
-    @Override
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {        
-        if (action.equals("registerCallback")) {   
-            _callbackContext = callbackContext;                     
-            this.registerCallback();
-            return true;
-        }        
-        else if (action.equals("testCallback")) {                        
-            this.testCallback(callbackContext);
-            return true;
-        }
-        else if (action.equals("checkStatus")) {
-            String portName = args.getString(0);
-            String portSettings = args.getString(1);
-            this.checkStatus(portName, portSettings, callbackContext);
-            return true;
-        }
-        return false;
-    }
-    */
-
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         // Execute an asynchronous task
+        
+        System.out.println("-------------------------------Executing");
+
         if(action.equals("registerCallback")) {
             onDataContext = callbackContext; //register the callback
+            
+            
+            System.out.println("-------------------------------Capture builder done");
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
+
+                    System.out.println("-------------------------------setting appkey and client");
+                    appkey = new AppKey("MC0CFHc4jhssCXc8FljtHDgOeiV3YZJjAhUAgu+FTZgrAjpFyEOcBnVfWzrs1LA=","android:com.capturesdk.cordova","43d33419-e8e6-4ec6-a1f2-c8f9e6b960c8"); 
+                    client = new CaptureClient(appkey);
+                    System.out.println("-------------------------------set appkey and client");
+                    //super.onCreate(savedInstanceState);
+                    //setContentView(R.layout.activity_main);
+                    System.out.println("-------------------------------Capture builder");            
+                    Capture.builder(cordova.getActivity().getApplicationContext())
+                    .enableLogging(BuildConfig.DEBUG)
+                    .build();
+
+
+                    System.out.println("-------------------------------Registering callback");
+
                     // Then you're allowed to execute more than twice a callback.
-                    PluginResult resultA = new PluginResult(PluginResult.Status.OK, "myfirstJSONResponse");
+                    PluginResult resultA = new PluginResult(PluginResult.Status.OK, "registeredCallback successful");
                     resultA.setKeepCallback(true);
                     onDataContext.sendPluginResult(resultA);
         
@@ -244,10 +283,11 @@ public class CaptureSDK extends CordovaPlugin {
         
                     // bla bla bla code
         
-        
+                    /*
                     PluginResult resultB = new PluginResult(PluginResult.Status.OK, "secondJSONResponse");
                     resultB.setKeepCallback(true);
                     onDataContext.sendPluginResult(resultB);       
+                    */
                 }
             });
             PluginResult pluginResult = new  PluginResult(PluginResult.Status.NO_RESULT); 
@@ -255,19 +295,17 @@ public class CaptureSDK extends CordovaPlugin {
         } else if(action.equals("testCallback")) {            
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
+                    System.out.println("-------------------------------Testing callback");
                     // Then you're allowed to execute more than twice a callback.
-                    PluginResult resultA = new PluginResult(PluginResult.Status.OK, "myfirstTestJSONResponse");
+                    PluginResult resultA = new PluginResult(PluginResult.Status.OK, "callbackTest was successful");
                     resultA.setKeepCallback(true);
                     onDataContext.sendPluginResult(resultA);
         
                     // Some more code
-        
                     Boolean something = true;
         
                     // bla bla bla code
-        
-        
-                    PluginResult resultB = new PluginResult(PluginResult.Status.OK, "secondTestJSONResponse");
+                    PluginResult resultB = new PluginResult(PluginResult.Status.OK, "second callbackTest was successful");
                     resultB.setKeepCallback(true);
                     onDataContext.sendPluginResult(resultB);       
                 }
@@ -275,149 +313,6 @@ public class CaptureSDK extends CordovaPlugin {
             PluginResult pluginResult = new  PluginResult(PluginResult.Status.NO_RESULT); 
             pluginResult.setKeepCallback(true); // Keep callback            
         }
-
         return true;
-    }
-    
-    public void registerCallback() {
-
-        final Context context = this.cordova.getActivity();
-        //final CallbackContext _callbackContext = callbackContext;        
-        cordova.getThreadPool()
-                .execute(new Runnable() {
-                    public void run() {
-                     
-                        try {
-                            JSONObject json = new JSONObject();
-                            try {
-                                json.put("registerCallback", "Success");                                
-                            } catch (JSONException ex) {
-
-                            } finally {
-                                _callbackContext.success(json);
-                                _callbackContext.success(json);
-                                _callbackContext.success(json);
-                            }
-                        } finally {
-                         /*   if (port != null) {
-                                try {
-
-                                    StarIOPort.releasePort(port);
-                                } catch (StarIOPortException e) {
-                                    _callbackContext.error("Failed to connect to printer" + e.getMessage());
-                                }
-                            }
-                            */
-                        }
-                    }
-                });
-    }
-
-    public void testCallback(CallbackContext callbackContext) {
-
-        final Context context = this.cordova.getActivity();
-        final CallbackContext cb = callbackContext;
-        cordova.getThreadPool()
-                .execute(new Runnable() {
-                    public void run() {
-                        try {
-                            JSONObject json = new JSONObject();
-                            try {
-                                json.put("testCallback", "Success");                                
-                                _callbackContext.success(json);
-                            } catch (JSONException ex) {
-                                cb.success(ex.getMessage());
-                                //_callbackContext.success(ex.getMessage());
-                            } catch (Exception ex) {
-                                cb.success(ex.getMessage());
-                                //_callbackContext.success(ex.getMessage());
-                            } finally {
-                                cb.success(json);                                
-                                cb.success(json);
-                                cb.success(json);
-                                _callbackContext.success(json);
-                                cb.success(json);
-
-                                
-                            }
-
-
-                        } finally {
-                         /*   if (port != null) {
-                                try {
-
-                                    StarIOPort.releasePort(port);
-                                } catch (StarIOPortException e) {
-                                    _callbackContext.error("Failed to connect to printer" + e.getMessage());
-                                }
-                            }
-                            */
-                        }
-                    }
-                });
-    }
-    
-    
-    public void checkStatus(String portName, String portSettings, CallbackContext callbackContext) {
-
-        final Context context = this.cordova.getActivity();
-        final CallbackContext _callbackContext = callbackContext;
-
-        final String _portName = portName;
-        final String _portSettings = portSettings;
-
-        cordova.getThreadPool()
-                .execute(new Runnable() {
-                    public void run() {
-
-                        /*StarIOPort port = null;
-                        try {
-
-                            port = StarIOPort.getPort(_portName, _portSettings, 10000, context);
-
-                            // A sleep is used to get time for the socket to completely open
-                            try {
-                                Thread.sleep(500);
-                            } catch (InterruptedException e) {
-                            }
-
-                            StarPrinterStatus status;
-                            Map<String, String> firmwareInformationMap = port.getFirmwareInformation();
-                            status = port.retreiveStatus();
-
-
-                            JSONObject json = new JSONObject();
-                            try {
-                                json.put("offline", status.offline);
-                                json.put("coverOpen", status.coverOpen);
-                                json.put("cutterError", status.cutterError);
-                                json.put("receiptPaperEmpty", status.receiptPaperEmpty);
-                                json.put("ModelName", firmwareInformationMap.get("ModelName"));
-                                json.put("FirmwareVersion", firmwareInformationMap.get("FirmwareVersion"));
-                            } catch (JSONException ex) {
-
-                            } finally {
-                                _callbackContext.success(json);
-                            }
-
-
-                        } catch (StarIOPortException e) {
-                            _callbackContext.error("Failed to connect to printer :" + e.getMessage());
-                        } finally {
-
-                            if (port != null) {
-                                try {
-
-                                    StarIOPort.releasePort(port);
-                                } catch (StarIOPortException e) {
-                                    _callbackContext.error("Failed to connect to printer" + e.getMessage());
-                                }
-                            }
-
-                        }
-                        */
-
-                    }
-                });
     }
 }
