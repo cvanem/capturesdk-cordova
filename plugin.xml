@@ -22,6 +22,12 @@
 		<config-file target="AndroidManifest.xml" parent="/manifest">
 			<uses-permission android:name="android.permission.BLUETOOTH" />
 		</config-file>		
+		
+        <config-file parent="./application" target="AndroidManifest.xml">
+	    	<meta-data android:name="com.socketmobile.capture.APP_KEY" android:value="..."/>
+	    	<meta-data android:name="com.socketmobile.capture.DEVELOPER_ID" android:value="..."/>
+        </config-file>
+
 		<framework src="src/android/capture-android.gradle" custom="true" type="gradleReference" />
 		
   	</platform>
