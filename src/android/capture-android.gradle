@@ -1,8 +1,12 @@
-repositories{    
-  jcenter()
-  flatDir {
-      dirs 'libs'
-   }
+repositories {
+    jcenter()
+    maven {
+        url "https://bin.socketmobile.com/repo/snapshots"
+    }
+}
+
+dependencies {
+    compile 'com.socketmobile:capture:1.0-rc1'
 }
 
 dependencies {

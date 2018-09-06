@@ -23,6 +23,66 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.util.Log;
 
+
+
+AppKey appkey = new AppKey("<my appkey>", "<my app id>", "<my developer id>");
+CaptureClient client = new CaptureClient(appkey);
+client.setListener(mListener);
+client.connect(connectionCallback);
+
+ConnectionCallback connectionCallback = new ConnectionCallback() {
+    @override public void onConnectionStateChanged(ConnectionState state) {
+        switch(state.get()) {
+            case ConnectionState.CONNECTING:
+                // do something or nothing
+                break;
+            case ConnectionState.CONNECTED:
+                // client is now usable
+                break;
+            case ConnectionState.DISCONNECTING:
+                // only called when shutting down gracefully
+                break;
+            case ConnectionState.DISCONNECTED:
+                if(state.disconnectCausedByError()) {
+                    // Handle error
+                } else {
+                    // Shut down normally
+                }
+            default:
+                // Unreachable
+                break;
+        }
+    }
+}
+
+@Override
+public void onDeviceStateEvent(DeviceStateEvent event) {
+    mDevice = event.getDevice();
+    DeviceState state = event.getState()
+    switch (state.intValue()) {
+        case DeviceState.GONE:
+            // Scanner is gone
+            break;
+        case DeviceState.AVAILABLE:
+            // Scanner is connected to the service. You can choose to open the device or not.
+            break;
+        case DeviceState.OPEN:
+            // Scanner is open, but you do not have control of it. It may be in the process of
+            // opening or another application may have opened the scanner.
+            break;
+        case DeviceState.READY:
+            // Scanner is ready. Configure scanner
+            break;
+    }
+}
+
+public void onData(DataEvent event) {
+    DeviceClient device = event.getDevice();
+    String data = event.getData().getString();
+    // do something
+}
+
+
 /**
  * This class echoes a string called from JavaScript.
  */
