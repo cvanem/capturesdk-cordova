@@ -12,8 +12,7 @@
 		<clobbers target="capturesdk" />
 	</js-module>
 	<platform name="android">
-		<source-file src="src/android/CaptureSDK.java" target-dir="src/capturesdk/cordova" />	
-		
+		<source-file src="src/android/CaptureSDK.java" target-dir="src/capturesdk/cordova" />
 		<config-file target="res/xml/config.xml" parent="/*">
 		<feature name="CaptureSDK">
 			<param name="android-package" value="capturesdk.cordova.CaptureSDK" />

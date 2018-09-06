@@ -6,7 +6,9 @@ repositories {
 }
 
 dependencies {
-    compile 'com.socketmobile:capture:1.0.0'
+    compile 'com.socketmobile:capture:1.0.0',
+    compile 'com.socketmobile:capture-android:1.0.0',
+    compile 'com.socketmobile:capture-common:1.0.0'
 }
 
 android {
