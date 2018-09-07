@@ -33,9 +33,9 @@
       "createcordova": "cordova create inappbrowser com.capturesdk.cordova inappbrowser",
       "addandroid": "cd inappbrowser && cordova platform add android@6.4",
       "addcapturesdk": "cd inappbrowser && cordova plugins add https://github.com/cvanem/capturesdk-cordova",
-      "addcapturesdkfromclone": "cd inappbrowser && cordova plugins add ../capturesdk",
+      "addcapturesdkfromclone": "cd inappbrowser && cordova plugins add ../capturesdk-cordova",
       "clonerepo": "git clone https://github.com/cvanem/capturesdk-cordova",
-      "addinappbrowser": "cd inappbrowser && cordova plugins add cordova-plugin-inappbrowser",      
+      "addinappbrowser": "cd inappbrowser && cordova plugins add cordova-plugin-inappbrowser",
       "copy": "node copy",
       "clean": "node clean",
       "android": "cd inappbrowser && cordova run android"
