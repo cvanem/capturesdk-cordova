@@ -1,8 +1,8 @@
 {
   "_from": "git+https://github.com/cvanem/capturesdk-cordova.git",
-  "_id": "cordova-plugin-starprnt@2.2.0",
+  "_id": "captureSDK-cordova@1.0.0",
   "_inBundle": false,
-  "_location": "/cordova-plugin-starprnt",
+  "_location": "/capturesdk-cordova",
   "_phantomChildren": {},
   "_requested": {
     "type": "git",
@@ -20,35 +20,26 @@
   "_spec": "https://github.com/cvanem/capturesdk-cordova",
   "_where": "c:\\Users\\chris\\source\\capturesdk-cordova\\examples\\inappbrowser",
   "author": {
-    "name": "Jose Angarita / Ruben Casas"
-  },
-  "bugs": {
-    "url": "https://github.com/auctifera-josed/starprnt/issues"
-  },
+    "name": "Chris Van Emmerik"
+  },  
   "bundleDependencies": false,
   "cordova": {
-    "id": "cordova-plugin-starprnt",
+    "id": "capturesdk-cordova",
     "platforms": [
       "android",
       "ios"
     ]
   },
   "deprecated": false,
-  "description": "StarPRNT Cordova Plugin for Star Micronics Bluetooth/LAN printers",
-  "homepage": "https://github.com/auctifera-josed/starprnt#readme",
+  "description": "Cordova Plugin for Socket Mobile Capture SDK",
+  "homepage": "https://github.com/cvanem/capturesdk-cordova",
   "keywords": [
     "cordova",
-    "startPRNT",
+    "CaptureSDK",
     "ecosystem:cordova",
     "cordova-ios",
     "cordova-android"
-  ],
-  "license": "MIT",
-  "name": "cordova-plugin-starprnt",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/auctifera-josed/starprnt.git"
-  },
+  ],  
   "scripts": {
     "jshint": "node node_modules/jshint/bin/jshint www && node node_modules/jshint/bin/jshint src && node node_modules/jshint/bin/jshint tests",
     "test": "npm run jshint"

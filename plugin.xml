@@ -54,9 +54,8 @@
 		<source-file src="src/ios/Communication.m" />
 		<header-file src="src/ios/CaptureSDK.h" />
 		<source-file src="src/ios/CaptureSDK.m" />		
-		<framework src="./frameworks/StarIO.framework" custom="true"/>
-		<framework src="./frameworks/StarIO_Extension.framework" custom="true"/>
 		<framework src="CoreBluetooth.framework"/>
 		<framework src="ExternalAccessory.framework"/>
+		<framework src="SKTCapture" type="podspec" spec="~> 1.0.0" />
 	</platform>
 </plugin>

@@ -1,5 +1,5 @@
 //
-//  StarPRNT.h
+//  CaptureSDK.h
 //  
 //
 //  Created by Jose Angarita on 5/17/16.
@@ -15,28 +15,11 @@
 
 #import "Communication.h"
 
-@interface StarPRNT : CDVPlugin <StarIoExtManagerDelegate> {}
+//@interface CaptureSDK : CDVPlugin <StarIoExtManagerDelegate> {}
 
 @property (nonatomic) StarIoExtManager *printerManager;
 
-- (void)portDiscovery:(CDVInvokedUrlCommand *)command;
-- (void)checkStatus:(CDVInvokedUrlCommand *)command;
-- (void)printRawText:(CDVInvokedUrlCommand *)command;
-- (void)printBase64Image:(CDVInvokedUrlCommand *)command;
-- (void)printRasterReceipt:(CDVInvokedUrlCommand *)command;
-- (void)printRasterData:(CDVInvokedUrlCommand *)command;
-- (void)print:(CDVInvokedUrlCommand *)command;
-- (void)printData:(CDVInvokedUrlCommand *)command;
-- (void)printRawData:(CDVInvokedUrlCommand *)command;
-- (void)printReceipt:(CDVInvokedUrlCommand *)command;
-- (void)printTicket:(CDVInvokedUrlCommand *)command;
-- (void)activateBlackMarkSensor:(CDVInvokedUrlCommand *)command;
-- (void)cancelBlackMarkSensor:(CDVInvokedUrlCommand *)command;
-- (void)setToDefaultSettings:(CDVInvokedUrlCommand *)command;
-// - (void)setPrintDirection:(CDVInvokedUrlCommand *)command;Not supported in TSP700II
-- (void)connect:(CDVInvokedUrlCommand *)command;
-- (void)disconnect:(CDVInvokedUrlCommand *)command;
-- (void)hardReset:(CDVInvokedUrlCommand *)command;
-- (void)openCashDrawer:(CDVInvokedUrlCommand *)command;
+- (void)registerCallback:(CDVInvokedUrlCommand *)command;
+- (void)testCallback:(CDVInvokedUrlCommand *)command;
 
 @end
