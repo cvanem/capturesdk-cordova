@@ -24,7 +24,7 @@ Open command prompt and navigate to the /examples directory and run the commands
     yarn android (compiles and runs the android app on a usb connected device or open emulator)
 
 
-Insert your APP_KEY and DEVELOPER_ID into the plugin.xml file.  Here is the section in the plugin.xml file you need to update:
+Insert your APP_KEY and DEVELOPER_ID into the plugin.xml file (See *Note below prior to updating this).  Here is the section in the plugin.xml file you need to update:
 
     <platform name="android">
         <config-file parent="./application" target="AndroidManifest.xml">
@@ -33,4 +33,12 @@ Insert your APP_KEY and DEVELOPER_ID into the plugin.xml file.  Here is the sect
         </config-file>
     </platform>
 
-This currently needs to be done in the public repo before running the yarn build example.  If you need to change this you will need to either change the https://github.com/cvanem/capturesdk-cordova repository before running yarn build or you can update the androidmanifest.xml manually after running yarn build but before running yarn android.
+*Note: If example builds from the public repository so if you need to change the above, you will need to change it in the public repository.  Alternatively you can do the following instead:
+In the example directory run:
+    
+    yarn clean
+    yarn clone repo (this clones the public repository to /examples/capturesdk-cordova
+    Open the /examples/capturesdk-cordova/plugin.xml file and make the necessary changes
+    yarn buildfrom clone (builds the cordova example using the cloned repo instead of the public repo)
+    yarn android
+    
