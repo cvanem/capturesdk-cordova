@@ -36,6 +36,7 @@ Insert your APP_KEY and DEVELOPER_ID into the plugin.xml file (See *Note below p
 *Note: If example builds from the public repository so if you need to change the above, you will need to change it in the public repository.  Alternatively you can do the following instead:
 In the example directory run:
     
+    yarn install
     yarn clean
     yarn clonerepo (this clones the public repository to /examples/capturesdk-cordova
     Open the /examples/capturesdk-cordova/plugin.xml file and make the necessary changes
