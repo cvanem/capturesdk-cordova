@@ -16,7 +16,7 @@ Prerequisites:
     cordova (npm install -g cordova)
     Android tools: Android Studio/android sdk/jdk
 
-Open command prompot and navigate to the /examples directory and run the commands:
+Open command prompt and navigate to the /examples directory and run the commands:
 
     yarn install
     yarn clean (Only needed if the examples/inappbrowser directory exists and you want to run yarn build)
