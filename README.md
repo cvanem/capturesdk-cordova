@@ -37,8 +37,8 @@ Insert your APP_KEY and DEVELOPER_ID into the plugin.xml file (See *Note below p
 In the example directory run:
     
     yarn clean
-    yarn clone repo (this clones the public repository to /examples/capturesdk-cordova
+    yarn clonerepo (this clones the public repository to /examples/capturesdk-cordova
     Open the /examples/capturesdk-cordova/plugin.xml file and make the necessary changes
-    yarn buildfrom clone (builds the cordova example using the cloned repo instead of the public repo)
+    yarn buildfromclone (builds the cordova example using the cloned repo instead of the public repo)
     yarn android
     
