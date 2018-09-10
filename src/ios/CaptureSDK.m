@@ -60,7 +60,10 @@ static NSString *dataCallbackId = nil;
 
 - (void)registerCallback:(CDVInvokedUrlCommand *)command {
     NSLog(@"Registering callback");
+    printf("registering callback");
     [self.commandDelegate runInBackground:^{
+        NSLog(@"Registering callback");
+        printf("registering callback");
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully registered callback!"];
         dataCallbackId = command.callbackId;
         [result setKeepCallbackAsBool:YES];
