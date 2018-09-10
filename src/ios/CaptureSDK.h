@@ -15,7 +15,7 @@
     SKTCaptureHelper* _capture;
 }
 
-//@property (nonatomic) StarIoExtManager *printerManager;
+@property (weak, nonatomic) IBOutlet UITextView *decodedDataText;
 
 - (void)viewDidLoad;
 - (void)registerCallback:(CDVInvokedUrlCommand *)command;
