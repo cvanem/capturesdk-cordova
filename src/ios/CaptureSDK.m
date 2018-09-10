@@ -15,6 +15,7 @@ static NSString *dataCallbackId = nil;
 - (void)registerCallback:(CDVInvokedUrlCommand *)command {
     //NSLog(@"Checking status");
     [self.commandDelegate runInBackground:^{
+        
         /*
         NSString *portName = nil;
         NSString *emulation = nil;
@@ -59,10 +60,11 @@ static NSString *dataCallbackId = nil;
                 [SMPort releasePort:port];
             }
         }
-        */
+        
         
         //NSLog(@"Sending status result");
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+        */
     }];
 }
 
