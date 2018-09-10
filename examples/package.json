@@ -42,7 +42,7 @@
       "clean": "node clean",
       "android": "cd inappbrowser && cordova run android",
       "buildios": "cd inappbrowser && cordova build ios",
-      "ipad": "cd build && cordova emulate ios --target='iPad-Pro, 11.4'"
+      "ipad": "cd inappbrowser && cordova emulate ios --target='iPad-Pro, 11.4'"
     },
     "author": "Chris Van Emmerik"    
   }
