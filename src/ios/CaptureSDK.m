@@ -14,7 +14,7 @@ static NSString *dataCallbackId = nil;
 
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+    //[super viewDidLoad];
 
     _capture = [SKTCaptureHelper sharedInstance];
     [_capture pushDelegate:self];
