@@ -56,6 +56,6 @@
 		<source-file src="src/ios/CaptureSDK.m" />		
 		<framework src="CoreBluetooth.framework"/>
 		<framework src="ExternalAccessory.framework"/>
-		<framework src="SKTCapture" type="podspec" spec="~> 1.0.0" />
+		<framework src="SKTCaptureObjC" type="podspec" spec="~> 1.0.0" />
 	</platform>
 </plugin>
