@@ -8,13 +8,8 @@
 
 #import <Cordova/CDVPlugin.h>
 #import <Foundation/Foundation.h>
-//#import <StarIO/SMPort.h>
-//#import <StarIO_Extension/StarIoExt.h>
-//#import <StarIO_Extension/StarIoExtManager.h>
 #import "SktCaptureHelper.h"
 #import <Cordova/CDV.h>
-
-#import "Communication.h"
 
 @interface CaptureSDK : CDVPlugin <SKTCaptureHelperDelegate> {}
 
