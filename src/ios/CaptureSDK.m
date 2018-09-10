@@ -10,14 +10,15 @@
 
 @implementation CaptureSDK
 
-static NSString *dataCallbackId = nil;
+@property (weak, nonatomic) IBOutlet UITextView *decodedDataText;
+//static NSString *dataCallbackId = nil;
 
 
 - (void)viewDidLoad {
     //[super viewDidLoad];
 
     _capture = [SKTCaptureHelper sharedInstance];
-    [_capture pushDelegate:self];
+    [_capture pushDelegate:self];t
 
     /*SKTAppInfo* appInfo = [SKTAppInfo new];
     appInfo.DeveloperID =@"43d33419-e8e6-4ec6-a1f2-c8f9e6b960c8";
@@ -38,6 +39,25 @@ static NSString *dataCallbackId = nil;
     [capture openWithAppInfo:appInfo completionHandler:^(SKTResult result) {
     NSLog(@"Opening Capture returns: %ld", result);
     }];
+}
+
+#pragma mark - SKTCaptureHelper delegate
+/**
+ * called when decoded data are received from a device
+ *
+ * @param decodedData contains the decoded data
+ * @param device identifies the device from which the decoded data comes from
+ * @param result contains an error if something wrong happen while getting the decoded data
+ * or if the SoftScan trigger operation has been cancelled
+ */
+-(void)didReceiveDecodedData:(SKTCaptureDecodedData*) decodedData fromDevice:(SKTCaptureHelperDevice*) device withResult:(SKTResult) result{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *text = [[decodedData.stringFromDecodedData componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
+        self.decodedDataText.text =
+        [self.decodedDataText.text stringByAppendingString: text];
+        self.decodedDataText.text =
+        [self.decodedDataText.text stringByAppendingString: @"\r\n"];
+    });
 }
 
 - (void)registerCallback:(CDVInvokedUrlCommand *)command {
