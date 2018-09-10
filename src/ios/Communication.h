@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <StarIO/SMPort.h>
+//#import <StarIO/SMPort.h>
 
 @interface Communication : NSObject
 
