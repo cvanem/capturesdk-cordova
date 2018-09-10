@@ -49,9 +49,7 @@
 		</config-file>
 		<config-file target="*-Info.plist" parent="NSBluetoothPeripheralUsageDescription">
       <string>To connect to Socket Mobile Devices</string>
-	  </config-file>
-		<header-file src="src/ios/Communication.h" />
-		<source-file src="src/ios/Communication.m" />
+	  </config-file>		
 		<header-file src="src/ios/CaptureSDK.h" />
 		<source-file src="src/ios/CaptureSDK.m" />		
 		<framework src="CoreBluetooth.framework"/>
