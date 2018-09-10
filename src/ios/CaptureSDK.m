@@ -16,7 +16,7 @@
     //[super viewDidLoad];
 
     _capture = [SKTCaptureHelper sharedInstance];
-    [_capture pushDelegate:self];t
+    [_capture pushDelegate:self];
 
     /*SKTAppInfo* appInfo = [SKTAppInfo new];
     appInfo.DeveloperID =@"43d33419-e8e6-4ec6-a1f2-c8f9e6b960c8";
