@@ -15,8 +15,6 @@
     SKTCaptureHelper* _capture;
 }
 
-@property (weak, nonatomic) IBOutlet UITextView *decodedDataText;
-
 - (void)viewDidLoad;
 - (void)registerCallback:(CDVInvokedUrlCommand *)command;
 - (void)testCallback:(CDVInvokedUrlCommand *)command;

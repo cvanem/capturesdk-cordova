@@ -9,8 +9,6 @@
 #import "CaptureSDK.h"
 
 @implementation CaptureSDK
-
-@property (weak, nonatomic) IBOutlet UITextView *decodedDataText;
 //static NSString *dataCallbackId = nil;
 
 
@@ -53,10 +51,11 @@
 -(void)didReceiveDecodedData:(SKTCaptureDecodedData*) decodedData fromDevice:(SKTCaptureHelperDevice*) device withResult:(SKTResult) result{
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *text = [[decodedData.stringFromDecodedData componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
-        self.decodedDataText.text =
+        /*self.decodedDataText.text =
         [self.decodedDataText.text stringByAppendingString: text];
         self.decodedDataText.text =
         [self.decodedDataText.text stringByAppendingString: @"\r\n"];
+        */
     });
 }
 
