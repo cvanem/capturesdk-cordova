@@ -39,7 +39,9 @@
       "addinappbrowser": "cd inappbrowser && cordova plugins add cordova-plugin-inappbrowser",
       "copy": "node copy",
       "clean": "node clean",
-      "android": "cd inappbrowser && cordova run android"
+      "android": "cd inappbrowser && cordova run android",
+      "buildios": "cd inappbrowser && cordova build ios",
+      "ipad": "cd build && cordova emulate ios --target='iPad-Pro, 11.4'"
     },
     "author": "Chris Van Emmerik"    
   }
