@@ -1,0 +1,44 @@
+{
+    "name": "capturesdk-cordova-examples",
+    "version": "1.0.0",
+    "description": "Socket Mobile Capture SDK Cordova Plugin Examples",    
+    "cordova": {
+      "id": "capturesdk-cordova-examples",
+      "platforms": [
+        "android",
+        "ios"
+      ]
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/cvanem/capturesdk-cordova"
+    },    
+    "keywords": [
+      "cordova",
+      "capture sdk",
+      "ecosystem:cordova",
+      "cordova-ios",
+      "cordova-android",
+      "socket mobile"
+    ],
+    "license": "MIT",
+    "dependencies": {
+      "fs-extra": "7.0.0"
+    },
+    "scripts": {
+      "test": "npm run jshint",
+      "jshint": "node node_modules/jshint/bin/jshint www && node node_modules/jshint/bin/jshint src && node node_modules/jshint/bin/jshint tests",
+      "build": "yarn createcordova && yarn addandroid && yarn addcapturesdk && yarn addinappbrowser && yarn copy",
+      "buildfromclone": "yarn createcordova && yarn addandroid && yarn addcapturesdkfromclone && yarn addinappbrowser && yarn copy",
+      "createcordova": "cordova create inappbrowser com.capturesdk.cordova inappbrowser",
+      "addandroid": "cd inappbrowser && cordova platform add android@6.4",
+      "addcapturesdk": "cd inappbrowser && cordova plugins add https://github.com/cvanem/capturesdk-cordova",
+      "addcapturesdkfromclone": "cd inappbrowser && cordova plugins add ../capturesdk-cordova",
+      "clonerepo": "git clone https://github.com/cvanem/capturesdk-cordova",
+      "addinappbrowser": "cd inappbrowser && cordova plugins add cordova-plugin-inappbrowser",
+      "copy": "node copy",
+      "clean": "node clean",
+      "android": "cd inappbrowser && cordova run android"
+    },
+    "author": "Chris Van Emmerik"    
+  }
