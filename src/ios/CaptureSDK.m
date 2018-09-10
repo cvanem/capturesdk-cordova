@@ -9,9 +9,7 @@
 #import "CaptureSDK.h"
 
 @implementation CaptureSDK
-//static NSString *dataCallbackId = nil;
-
-
+static NSString *dataCallbackId = nil;
 - (void)viewDidLoad {
     //[super viewDidLoad];
 
@@ -49,8 +47,9 @@
  * or if the SoftScan trigger operation has been cancelled
  */
 -(void)didReceiveDecodedData:(SKTCaptureDecodedData*) decodedData fromDevice:(SKTCaptureHelperDevice*) device withResult:(SKTResult) result{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSString *text = [[decodedData.stringFromDecodedData componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
+    NSLog(@"didReceiveDecodedData");
+    dispatch_async(dispatch_get_main_queue(), ^{        
+        //NSString *text = [[decodedData.stringFromDecodedData componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
         /*self.decodedDataText.text =
         [self.decodedDataText.text stringByAppendingString: text];
         self.decodedDataText.text =
