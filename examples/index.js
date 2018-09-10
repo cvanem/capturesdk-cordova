@@ -43,7 +43,7 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {        
         this.receivedEvent('deviceready');
-
+        alert('device: ' + device.cordova);
         var url = environment == 'Development' ? developmentUrl : productionUrl;        
         inAppBrowserRef = cordova.InAppBrowser.open(url, '_blank', 'location=no'); //open the in app browser with no location bar
         inAppBrowserRef.addEventListener( "loadstop", function() { //Fired when browser is finished loading
