@@ -13,7 +13,7 @@
 
 @interface CaptureSDK : CDVPlugin <SKTCaptureHelperDelegate> {}
 
-@property (nonatomic) StarIoExtManager *printerManager;
+//@property (nonatomic) StarIoExtManager *printerManager;
 
 - (void)registerCallback:(CDVInvokedUrlCommand *)command;
 - (void)testCallback:(CDVInvokedUrlCommand *)command;
