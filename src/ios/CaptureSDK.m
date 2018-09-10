@@ -60,58 +60,13 @@
 }
 
 - (void)registerCallback:(CDVInvokedUrlCommand *)command {
-    //NSLog(@"Checking status");
+    NSLog(@"Registering callback");
     [self.commandDelegate runInBackground:^{
-        
-        /*
-        NSString *portName = nil;
-        NSString *emulation = nil;
-        CDVPluginResult    *result = nil;
-        StarPrinterStatus_2 status;
-        SMPort *port = nil;
-        if (command.arguments.count > 0) {
-            portName = [command.arguments objectAtIndex:0];
-            emulation = [command.arguments objectAtIndex:1];
-        }
-        NSString *portSettings = [self getPortSettingsOption:emulation];
-        @try {
-            
-            port = [SMPort getPort:portName :portSettings :10000];     // 10000mS!!!
-            
-            // Sleep to avoid a problem which sometimes cannot communicate with Bluetooth.
-     
-            NSOperatingSystemVersion version = {11, 0, 0};
-            BOOL isOSVer11OrLater = [[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:version];
-            if ((isOSVer11OrLater) && ([portName.uppercaseString hasPrefix:@"BT:"])) {
-                [NSThread sleepForTimeInterval:0.2];
-            }
-            
-            [port getParsedStatus:&status :2];
-            NSDictionary *firmwareInformation = [[NSMutableDictionary alloc] init];
-            @try {
-                firmwareInformation = [port getFirmwareInformation];
-            }
-            @catch (PortException *exception) {
-                //unable to get Firmware
-            }
-          
-            NSDictionary *statusDictionary = [self portStatusToDictionary:status :firmwareInformation];
-            result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:statusDictionary];
-        }
-        @catch (PortException *exception) {
-            NSLog(@"Port exception");
-            result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[exception reason]];
-        }
-        @finally {
-            if (port != nil) {
-                [SMPort releasePort:port];
-            }
-        }
-        
-        
-        //NSLog(@"Sending status result");
-        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
-        */
+        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully registered callback!"];
+        dataCallbackId = command.callbackId;
+        [result setKeepCallbackAsBool:YES];
+        NSLog(@"Registered callback");
+        [self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];
     }];
 }
 
