@@ -15,6 +15,7 @@
 
 //@property (nonatomic) StarIoExtManager *printerManager;
 
+- (void)viewDidLoad;
 - (void)registerCallback:(CDVInvokedUrlCommand *)command;
 - (void)testCallback:(CDVInvokedUrlCommand *)command;
 

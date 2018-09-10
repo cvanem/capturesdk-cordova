@@ -39,7 +39,7 @@
 	<platform name="ios">
 		<config-file target="config.xml" parent="/*">
 			<feature name="CaptureSDK">
-				<param name="ios-package" value="CaptureSDK" />
+				<param name="ios-package" value="capturesdk.cordova.CaptureSDK" />
 			</feature>
 		</config-file>		
 		<config-file target="*-Info.plist" parent="UISupportedExternalAccessoryProtocols">
