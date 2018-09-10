@@ -28,7 +28,7 @@ In the example directory run:
     
     1. yarn install
     2. yarn clean
-    3. yarn clonerepo (this clones the public repository to /examples/capturesdk-cordova
+    3. yarn clonerepo (this clones the public repository to /examples/capturesdk-cordova)
     4. Open the /examples/capturesdk-cordova/plugin.xml file and make the necessary changes (see below for instructions)
     5. yarn buildfromclone (builds the cordova example using the cloned repo instead of the public repo)
     6. yarn android
