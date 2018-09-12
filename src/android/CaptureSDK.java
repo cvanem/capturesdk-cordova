@@ -35,6 +35,7 @@ import com.socketmobile.capture.android.events.ConnectionStateEvent;
 import com.socketmobile.capture.client.CaptureClient;
 //import com.socketmobile.capture.client.CaptureClient$Listener; //doesn't work
 //import com.socketmobile.capture.client.CaptureClient.Listener; //doesn't work
+import com.socketmobile.capture.client.CaptureClient.Listener; //doesn't work
 //import com.socketmobile.capture.client.CaptureClient.CaptureClient.Listener; //doesn't work
 
 import com.socketmobile.capture.CaptureError;
@@ -182,7 +183,7 @@ public class CaptureSDK extends CordovaPlugin {
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
                     System.out.println("-------------------------------Building");
-                    Capture.builder(this)
+                    Capture.builder(cordova.getActivity().getApplicationContext())
                     .enableLogging(BuildConfig.DEBUG)
                     .build();
                     System.out.println("-------------------------------Built");
