@@ -177,46 +177,16 @@ public class CaptureSDK extends CordovaPlugin {
         //This registers the javascript callback.  The callback is currently stored in onDataContext        
         if(action.equals("registerCallback")) {
             onDataContext = callbackContext; //register the callback
-            
+            System.out.println("-------------------------------Building");
             Capture.builder(cordova.getActivity().getApplicationContext())
             //.enableLogging(BuildConfig.DEBUG)
             .build();
-
-            //Attempt to implement connectionCallback interface
-            connectionCallback = new ConnectionCallback() {
-                public void onConnectionStateChanged(ConnectionState state) {
-                    System.out.println("-------------------------------Connection State Changed");
-                    System.out.println(state);
-                    //Temporarily commented out due to error
-                    /*switch(state.get()) {
-                        case ConnectionState.CONNECTING:
-                            // do something or nothing
-                            break;
-                        case ConnectionState.CONNECTED:
-                            // client is now usable
-                            break;
-                        case ConnectionState.DISCONNECTING:
-                            // only called when shutting down gracefully
-                            break;
-                        case ConnectionState.DISCONNECTED:
-                            if(state.disconnectCausedByError()) {
-                                // Handle error
-                            } else {
-                                // Shut down normally
-                            }
-                        default:
-                            // Unreachable
-                            break;
-                    }
-                    */
-                }
-            };            
-            
-            System.out.println("-------------------------------Capture builder done");
+            System.out.println("-------------------------------Built");            
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {                    
 
-                    //Set the app key and initialize capture client
+                    
+                    /*//Set the app key and initialize capture client
                     System.out.println("-------------------------------setting appkey and client");
                     appkey = new AppKey("MC0CFHc4jhssCXc8FljtHDgOeiV3YZJjAhUAgu+FTZgrAjpFyEOcBnVfWzrs1LA=","android:com.capturesdk.cordova","43d33419-e8e6-4ec6-a1f2-c8f9e6b960c8"); 
                     client = new CaptureClient(appkey);
@@ -224,6 +194,7 @@ public class CaptureSDK extends CordovaPlugin {
                     //client.setListener(new com.socketmobile.capture.client.CaptureClient.Listner() {
                     //});                    
                     client.connect(connectionCallback); //set the connection callback
+                    */
 
                     System.out.println("-------------------------------Registering callback");
                     // Then you're allowed to execute more than twice a callback.
