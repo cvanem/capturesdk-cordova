@@ -86,6 +86,7 @@ public class CaptureSDK extends CordovaPlugin {
         pluginResult.setKeepCallback(true); // Keep callback
     }
 
+    /*
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onCaptureDeviceStateChange(DeviceStateEvent event) {
         System.out.println("-------------------------------onCaptureDeviceStateChange");
@@ -100,7 +101,9 @@ public class CaptureSDK extends CordovaPlugin {
                 // Device not ready for use
         }
     }
+    */
 
+    /*
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onCaptureServiceConnectionStateChange(ConnectionStateEvent event) {
         System.out.println("-------------------------------onCaptureServiceConnectionStateChange");
@@ -111,13 +114,13 @@ public class CaptureSDK extends CordovaPlugin {
             CaptureError error = state.getError();
             switch(error.getCode()) {
                 case CaptureError.COMPANION_NOT_INSTALLED:
-                /*
-                alert("Socket Mobile Companion must be installed to use your scanner") {
-                    positiveButton("Install") { // onClick
-                        Capture.installCompanion(this.cordova.getActivity())
-                    }
-                }
-                */
+                
+                //alert("Socket Mobile Companion must be installed to use your scanner") {
+                    //positiveButton("Install") { // onClick
+                        //Capture.installCompanion(this.cordova.getActivity())
+                    //}
+                //}
+                
                     break;
                 case CaptureError.SERVICE_NOT_RUNNING:
                     if (state.isDisconnected()) {
@@ -129,13 +132,12 @@ public class CaptureSDK extends CordovaPlugin {
                     }
                     break;
                 case CaptureError.BLUETOOTH_NOT_ENABLED:
-                /*alert("Bluetooth must be enabled to use your scanner") {
-                    positiveButton("Enable") { // onClick
+                //alert("Bluetooth must be enabled to use your scanner") {
+                    //positiveButton("Enable") { // onClick
                         // BLUETOOTH permission must be enabled in your AndroidManifest
-                        startActivity(Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE));
-                    }
-                }
-                */
+                        //startActivity(Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE));
+                    //}
+                //}                
                     break;
             }
         }
@@ -158,6 +160,7 @@ public class CaptureSDK extends CordovaPlugin {
                 break;
         }
     }
+    */
     
     /**
      * Executes the request and returns PluginResult.
@@ -176,14 +179,13 @@ public class CaptureSDK extends CordovaPlugin {
         //This registers the javascript callback.  The callback is currently stored in onDataContext        
         if(action.equals("registerCallback")) {
             onDataContext = callbackContext; //register the callback
-
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
-                    System.out.println("-------------------------------Building");
+                    //System.out.println("-------------------------------Building");
                     //Capture.builder(cordova.getActivity().getApplicationContext())
                     //.enableLogging(BuildConfig.DEBUG)
                     //.build();
-                    System.out.println("-------------------------------Built");
+                    //System.out.println("-------------------------------Built");
                     
                     /*//Set the app key and initialize capture client
                     System.out.println("-------------------------------setting appkey and client");
@@ -195,7 +197,7 @@ public class CaptureSDK extends CordovaPlugin {
                     client.connect(connectionCallback); //set the connection callback
                     */
 
-                    System.out.println("-------------------------------Registering callback");
+                    //System.out.println("-------------------------------Registering callback");
                     // Then you're allowed to execute more than twice a callback.
                     PluginResult resultA = new PluginResult(PluginResult.Status.OK, "registeredCallback successful");
                     resultA.setKeepCallback(true);
@@ -229,5 +231,4 @@ public class CaptureSDK extends CordovaPlugin {
         return true;
     }
 }
-      
         
