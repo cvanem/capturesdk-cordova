@@ -182,7 +182,7 @@ public class CaptureSDK extends CordovaPlugin {
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
                     System.out.println("-------------------------------Building");
-                    Capture.builder(cordova.getActivity().getApplicationContext())
+                    Capture.builder(this)
                     .enableLogging(BuildConfig.DEBUG)
                     .build();
                     System.out.println("-------------------------------Built");
