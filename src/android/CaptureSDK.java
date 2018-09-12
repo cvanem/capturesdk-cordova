@@ -23,6 +23,8 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.util.Log;
 
+
+/*
 import com.socketmobile.capture.android.Capture;
 
 import com.socketmobile.capture.client.DeviceClient;
@@ -44,6 +46,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import com.capturesdk.cordova.BuildConfig;
 
+*/
 /**
  * This class echoes a string called from JavaScript.
  */
