@@ -354,68 +354,14 @@ public class CaptureSDK extends CordovaPlugin {
         //This registers the javascript callback.  The callback is currently stored in onDataContext        
         if(action.equals("registerCallback")) {
             onDataContext = callbackContext; //register the callback
-            System.out.println("-------------------------------Building");
-            //Capture.builder(cordova.getActivity().getApplicationContext())
-            //.enableLogging(BuildConfig.DEBUG)
-            //.build();
-            System.out.println("-------------------------------Built");            
-            cordova.getThreadPool().execute(new Runnable() {
-                public void run() {                    
 
-                    
-                    /*//Set the app key and initialize capture client
-                    System.out.println("-------------------------------setting appkey and client");
-                    appkey = new AppKey("MC0CFHc4jhssCXc8FljtHDgOeiV3YZJjAhUAgu+FTZgrAjpFyEOcBnVfWzrs1LA=","android:com.capturesdk.cordova","43d33419-e8e6-4ec6-a1f2-c8f9e6b960c8"); 
-                    client = new CaptureClient(appkey);
-                    //Can't figure out out to import CaptureClient.Listner as it alows throws a compiler error when imported
-                    //client.setListener(new com.socketmobile.capture.client.CaptureClient.Listner() {
-                    //});                    
-                    client.connect(connectionCallback); //set the connection callback
-                    */
-
-                    System.out.println("-------------------------------Registering callback");
-                    // Then you're allowed to execute more than twice a callback.
-                    PluginResult resultA = new PluginResult(PluginResult.Status.OK, "registeredCallback successful");
-                    resultA.setKeepCallback(true);
-                    onDataContext.sendPluginResult(resultA);                    
-                }
-            });
-            PluginResult pluginResult = new  PluginResult(PluginResult.Status.NO_RESULT); 
-            pluginResult.setKeepCallback(true); // Keep callback            
-        } else if(action.equals("testCallback")) {          
-            //Tests the onDataContext callback to ensure it has been set and functions correctly  
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
-                    System.out.println("-------------------------------Testing callback");
-                    // Then you're allowed to execute more than twice a callback.
-                    PluginResult resultA = new PluginResult(PluginResult.Status.OK, "callbackTest was successful");
-                    resultA.setKeepCallback(true);
-                    onDataContext.sendPluginResult(resultA);
-        
-                    // Some more code
-                    Boolean something = true;
-        
-                    // bla bla bla code
-                    PluginResult resultB = new PluginResult(PluginResult.Status.OK, "second callbackTest was successful");
-                    resultB.setKeepCallback(true);
-                    onDataContext.sendPluginResult(resultB);       
-                }
-            });
-            PluginResult pluginResult = new  PluginResult(PluginResult.Status.NO_RESULT); 
-            pluginResult.setKeepCallback(true); // Keep callback            
-        }
-        return true;
-    }
-}
-            onDataContext = callbackContext; //register the callback
-            System.out.println("-------------------------------Building");
-            Capture.builder(cordova.getActivity().getApplicationContext())
-            //.enableLogging(BuildConfig.DEBUG)
-            .build();
-            System.out.println("-------------------------------Built");            
-            cordova.getThreadPool().execute(new Runnable() {
-                public void run() {                    
-
+                    System.out.println("-------------------------------Building");
+                    //Capture.builder(cordova.getActivity().getApplicationContext())
+                    //.enableLogging(BuildConfig.DEBUG)
+                    //.build();
+                    System.out.println("-------------------------------Built");
                     
                     /*//Set the app key and initialize capture client
                     System.out.println("-------------------------------setting appkey and client");
