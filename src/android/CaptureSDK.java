@@ -188,6 +188,7 @@ public class CaptureSDK extends CordovaPlugin {
                     .build();
                     System.out.println("-------------------------------Built");
 
+                    /*
                     CaptureClient.Listner mListner = new CaptureClient.Listner() {
                         @override
                         public void onDeviceStateEvent(DeviceStateEvent event) {
@@ -210,6 +211,7 @@ public class CaptureSDK extends CordovaPlugin {
                             }
                         }
                     };
+                    */
                     
                     /*//Set the app key and initialize capture client
                     System.out.println("-------------------------------setting appkey and client");
