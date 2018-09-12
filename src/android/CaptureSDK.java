@@ -176,6 +176,10 @@ public class CaptureSDK extends CordovaPlugin {
         //This registers the javascript callback.  The callback is currently stored in onDataContext        
         if(action.equals("registerCallback")) {
             onDataContext = callbackContext; //register the callback
+            
+            Capture.builder(cordova.getActivity().getApplicationContext())
+            //.enableLogging(BuildConfig.DEBUG)
+            .build();
 
             //Attempt to implement connectionCallback interface
             connectionCallback = new ConnectionCallback() {
