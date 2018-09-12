@@ -85,78 +85,6 @@ public class CaptureSDK extends CordovaPlugin {
         pluginResult.setKeepCallback(true); // Keep callback
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    public void onCaptureDeviceStateChange(DeviceStateEvent event) {
-        System.out.println("-------------------------------onCaptureDeviceStateChange");
-        DeviceClient device = event.getDevice();
-        DeviceState state = event.getState();
-
-        switch(state.intValue()) {
-            case DeviceState.READY:
-                // Ready to use
-                break;
-            default:
-                // Device not ready for use
-        }
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    public void onCaptureServiceConnectionStateChange(ConnectionStateEvent event) {
-        System.out.println("-------------------------------onCaptureServiceConnectionStateChange");
-        ConnectionState state = event.getState();
-        CaptureClient client = event.getClient();
-
-        if (state.hasError()) {
-            CaptureError error = state.getError();
-            switch(error.getCode()) {
-                case CaptureError.COMPANION_NOT_INSTALLED:
-                /*
-                alert("Socket Mobile Companion must be installed to use your scanner") {
-                    positiveButton("Install") { // onClick
-                        Capture.installCompanion(this.cordova.getActivity())
-                    }
-                }
-                */
-                    break;
-                case CaptureError.SERVICE_NOT_RUNNING:
-                    if (state.isDisconnected()) {
-                        if (Capture.notRestartedRecently()) {
-                            //Capture.restart(this);
-                        } else {
-                            // Service keeps crashing - Reboot the host device and check for updates to Companion
-                        }
-                    }
-                    break;
-                case CaptureError.BLUETOOTH_NOT_ENABLED:
-                /*alert("Bluetooth must be enabled to use your scanner") {
-                    positiveButton("Enable") { // onClick
-                        // BLUETOOTH permission must be enabled in your AndroidManifest
-                        startActivity(Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE));
-                    }
-                }
-                */
-                    break;
-            }
-        }
-
-        switch(state.intValue()) {
-            case ConnectionState.CONNECTING:
-                // ...
-                break;
-            case ConnectionState.CONNECTED:
-                // ...
-                break;
-            case ConnectionState.READY:
-                // ...
-                break;
-            case ConnectionState.DISCONNECTING:
-                // ...
-                break;
-            case ConnectionState.DISCONNECTED:
-                // ...
-                break;
-        }
-    }
     
     /**
      * Executes the request and returns PluginResult.
@@ -183,8 +111,8 @@ public class CaptureSDK extends CordovaPlugin {
                     //Capture.builder(cordova.getActivity().getApplicationContext())
                     //.enableLogging(BuildConfig.DEBUG)
                     //.build();            
-                    System.out.println("-------------------------------Capture builder done");                    
-                    System.out.println("-------------------------------setting appkey and client");
+                    //System.out.println("-------------------------------Capture builder done");                    
+                    //System.out.println("-------------------------------setting appkey and client");
                     //appkey = new AppKey("MC0CFHc4jhssCXc8FljtHDgOeiV3YZJjAhUAgu+FTZgrAjpFyEOcBnVfWzrs1LA=","android:com.capturesdk.cordova","43d33419-e8e6-4ec6-a1f2-c8f9e6b960c8"); 
                     //client = new CaptureClient(appkey);
                     //Can't figure out out to import CaptureClient.Listner as it alows throws a compiler error when imported
