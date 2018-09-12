@@ -36,7 +36,7 @@
       "adddeviceplugin": "cd inappbrowser && cordova plugins add cordova-plugin-device",
       "addcapturesdk": "cd inappbrowser && cordova plugins add https://github.com/cvanem/capturesdk-cordova",
       "addcapturesdkfromclone": "cd inappbrowser && cordova plugins add ../capturesdk-cordova",
-      "clonerepo": "git clone https://github.com/cvanem/capturesdk-cordova",
+      "clonerepo": "git clone -b test2 https://github.com/cvanem/capturesdk-cordova",
       "addinappbrowser": "cd inappbrowser && cordova plugins add cordova-plugin-inappbrowser",
       "copy": "node copy",
       "clean": "node clean",
