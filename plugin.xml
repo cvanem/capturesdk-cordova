@@ -12,13 +12,13 @@
 		<clobbers target="capturesdk" />
 	</js-module>
 	<platform name="android">
-		<source-file src="src/android/CaptureSDK.java" target-dir="src/capturesdk/cordova" />
+		<source-file src="src/android/CaptureSDK.java" target-dir="src/greenlink/cordova" />
 		<config-file target="res/xml/config.xml" parent="/*">
 		<feature name="CaptureSDK">
 			<param name="android-package" value="app.greenlink.myapplication" />
 		</feature>
 		</config-file>
-		<config-file target="AndroidManifest.xml" parent="/*" />
+		<config-file target="AndroidManifest.xml" parent="/*" />com.capturesdk.cordova
 		<config-file target="AndroidManifest.xml" parent="/manifest">
 			<uses-permission android:name="android.permission.BLUETOOTH" />
 		</config-file>
