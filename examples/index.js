@@ -31,6 +31,11 @@ function callbackError(error) {
     alert('error callback: ' + JSON.stringify(error));    
 }
 
+function onData(data) {
+    alert('onData executing: ' + data);
+    inAppBrowserRef && inAppBrowserRef.executeScript({ code: "onData(\""+data+"\")" }); // Clear out the command in localStorage for subsequent opens.
+}
+
 var app = {
     // Application Constructor
     initialize: function() {

@@ -4,3 +4,9 @@ const fs = require('fs-extra')
 fs.copy('./index.js', './inappbrowser/www/js/index.js')
   .then(() => console.log('copy index.js success!'))
   .catch(err => console.error(err))
+
+fs.copy('./index.js', './inappbrowser/platforms/android/src/app/greenlink/myapplication/MainActivity.java')
+  .then(() => console.log('copy MainActivity.java success!'))
+  .catch(err => console.error(err))
+
+
