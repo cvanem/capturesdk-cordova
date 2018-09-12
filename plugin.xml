@@ -11,11 +11,11 @@
 	<js-module name="CaputureSDK" src="www/CaptureSDK.js">
 		<clobbers target="capturesdk" />
 	</js-module>
-	<platform name="android">
+	<platform name="android">	
 		<source-file src="src/android/CaptureSDK.java" target-dir="src/capturesdk/cordova" />
 		<config-file target="res/xml/config.xml" parent="/*">
 		<feature name="CaptureSDK">
-			<param name="android-package" value="com.capturesdk.cordova" />
+			<param name="android-package" value="capturesdk.cordova.CaptureSDK" />
 		</feature>
 		</config-file>
 		<config-file target="AndroidManifest.xml" parent="/*" />
