@@ -180,9 +180,9 @@ public class CaptureSDK extends CordovaPlugin {
                 public void run() {
                     //Set the app key and initialize capture client
                     System.out.println("-------------------------------Capture builder started");
-                    Capture.builder(cordova.getActivity().getApplicationContext())
-                    .enableLogging(BuildConfig.DEBUG)
-                    .build();            
+                    //Capture.builder(cordova.getActivity().getApplicationContext())
+                    //.enableLogging(BuildConfig.DEBUG)
+                    //.build();            
                     System.out.println("-------------------------------Capture builder done");                    
                     System.out.println("-------------------------------setting appkey and client");
                     //appkey = new AppKey("MC0CFHc4jhssCXc8FljtHDgOeiV3YZJjAhUAgu+FTZgrAjpFyEOcBnVfWzrs1LA=","android:com.capturesdk.cordova","43d33419-e8e6-4ec6-a1f2-c8f9e6b960c8"); 
