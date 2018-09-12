@@ -42,8 +42,8 @@ import com.socketmobile.capture.AppKey;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-//import com.capturesdk.cordova.BuildConfig;
-import app.greenlink.myapplication.BuildConfig;
+import com.capturesdk.cordova.BuildConfig;
+//import app.greenlink.myapplication.BuildConfig;
 
 /**
  * This class echoes a string called from JavaScript.
