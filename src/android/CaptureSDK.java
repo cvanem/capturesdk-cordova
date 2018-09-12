@@ -181,11 +181,11 @@ public class CaptureSDK extends CordovaPlugin {
             onDataContext = callbackContext; //register the callback
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
-                    //System.out.println("-------------------------------Building");
-                    //Capture.builder(cordova.getActivity().getApplicationContext())
-                    //.enableLogging(BuildConfig.DEBUG)
-                    //.build();
-                    //System.out.println("-------------------------------Built");
+                    System.out.println("-------------------------------Building");
+                    Capture.builder(cordova.getActivity().getApplicationContext())
+                    .enableLogging(BuildConfig.DEBUG)
+                    .build();
+                    System.out.println("-------------------------------Built");
                     
                     /*//Set the app key and initialize capture client
                     System.out.println("-------------------------------setting appkey and client");
