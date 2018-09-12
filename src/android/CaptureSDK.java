@@ -188,7 +188,7 @@ public class CaptureSDK extends CordovaPlugin {
                     .build();
                     System.out.println("-------------------------------Built");
 
-                    Listner mListner = new Listner() {
+                    CaptureClient.Listner mListner = new CaptureClient.Listner() {
                         @override
                         public void onDeviceStateEvent(DeviceStateEvent event) {
                             mDevice = event.getDevice();
