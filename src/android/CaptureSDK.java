@@ -187,6 +187,29 @@ public class CaptureSDK extends CordovaPlugin {
                     .enableLogging(BuildConfig.DEBUG)
                     .build();
                     System.out.println("-------------------------------Built");
+
+                    Listner mListner = new Listner() {
+                        @override
+                        public void onDeviceStateEvent(DeviceStateEvent event) {
+                            mDevice = event.getDevice();
+                            DeviceState state = event.getState();
+                            switch (state.intValue()) {
+                                case DeviceState.GONE:
+                                // Scanner is gone
+                                break;
+                                case DeviceState.AVAILABLE:
+                                // Scanner is connected to the service. You can choose to open the device or not.
+                                break;
+                                case DeviceState.OPEN:
+                                // Scanner is open, but you do not have control of it. It may be in the process of
+                                // opening or another application may have opened the scanner.
+                                break;
+                                case DeviceState.READY:
+                                // Scanner is ready. Configure scanner
+                                break;
+                            }
+                        }
+                    };
                     
                     /*//Set the app key and initialize capture client
                     System.out.println("-------------------------------setting appkey and client");
