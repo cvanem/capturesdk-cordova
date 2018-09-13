@@ -17,7 +17,7 @@
        under the License.
  */
 
-package app.greenlink.myapplication;
+package greenlink.app;
 
 import android.os.Bundle;
 import org.apache.cordova.*;
