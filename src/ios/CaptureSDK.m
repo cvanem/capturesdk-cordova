@@ -28,7 +28,8 @@ static NSString *dataCallbackId = nil;
     }];
     */
     SKTAppInfo* appInfo = [SKTAppInfo new];
-    appInfo.AppID = @"ios:capturesdk.cordova.CaptureSDK";
+    //appInfo.AppID = @"ios:capturesdk.cordova.CaptureSDK";
+    appInfo.AppID = @"ios:app.greenlink.myapplication";
     appInfo.DeveloperID = @"43d33419-e8e6-4ec6-a1f2-c8f9e6b960c8";
     appInfo.AppKey = @"MC4CFQDnEnESRw+quG5E+TdUcBclPTbVLgIVAPHgdQ1f9Yt7sS6beflEa5SEHF5r";
     SKTCaptureHelper* capture = [SKTCaptureHelper sharedInstance];
