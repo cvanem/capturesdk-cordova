@@ -37,7 +37,7 @@
 		</config-file>		
 		<config-file target="*-Info.plist" parent="UISupportedExternalAccessoryProtocols">
 	    <array>
-        <string>jp.star-m.starpro</string>
+        	<string>com.socketmobile.chs</string>			
 	    </array>
 		</config-file>
 		<config-file target="*-Info.plist" parent="NSBluetoothPeripheralUsageDescription">
