@@ -63,16 +63,15 @@ static NSString *dataCallbackId = nil;
 - (void)registerCallback:(CDVInvokedUrlCommand *)command {
     NSLog(@"Registering callback");
     printf("registering callback");
-    
+
     SKTAppInfo* appInfo = [SKTAppInfo new];
-    //appInfo.AppID = @"ios:capturesdk.cordova.CaptureSDK";
     appInfo.AppID = @"ios:app.greenlink.myapplication";
     appInfo.DeveloperID = @"43d33419-e8e6-4ec6-a1f2-c8f9e6b960c8";
-    appInfo.AppKey = @"MC4CFQDnEnESRw+quG5E+TdUcBclPTbVLgIVAPHgdQ1f9Yt7sS6beflEa5SEHF5r";
+    appInfo.AppKey = @"MC0CFQCvXP07sIez0O8JTROYnQ7YaWS+5wIUXnR37wh9vVliGMkxa3Z8S9xeOfs=";
     SKTCaptureHelper* capture = [SKTCaptureHelper sharedInstance];
     [capture pushDelegate:self];
     [capture openWithAppInfo:appInfo completionHandler:^(SKTResult result) {
-        NSLog(@"Opening Capture returns: %ld", result);
+    NSLog(@"Opening Capture returns: %ld", result);
     }];
 
     [self.commandDelegate runInBackground:^{
