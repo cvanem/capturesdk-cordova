@@ -23,7 +23,7 @@
 			<uses-permission android:name="android.permission.BLUETOOTH" />
 		</config-file>
         <config-file parent="./application" target="AndroidManifest.xml">	    							
-			<meta-data android:name="com.socketmobile.capture.APP_KEY" android:value="MC0CFQD6i+XQ/tVSIx/DSqmXyAbM6ARA/AIUb41nIXNJoscvz/TgpsHYl7pLFqQ=" />
+			<meta-data android:name="com.socketmobile.capture.APP_KEY" android:value="MC0CFQCnislmoKluY9MXVxkYFXo/vBpLhQIUXuzQ6uRwAJz7w0+ypZ/f8S94oTM=" />
         	<meta-data android:name="com.socketmobile.capture.DEVELOPER_ID" android:value="43d33419-e8e6-4ec6-a1f2-c8f9e6b960c8" />
         </config-file>
 		<framework src="src/android/capture-android.gradle" custom="true" type="gradleReference" />
