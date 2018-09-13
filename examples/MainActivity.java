@@ -64,7 +64,7 @@ public class MainActivity extends CordovaActivity
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onData(DataEvent event) {
-        System.out.println("-------------------------------onData from MainActivity");
+        System.out.println("onData from MainActivity");
         DeviceClient device = event.getDevice();
         String data = event.getData().getString();           
         loadUrl("javascript:window.onData(\""+data+"\")");
