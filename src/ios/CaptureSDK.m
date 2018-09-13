@@ -61,22 +61,27 @@ static NSString *dataCallbackId = nil;
 }
 
 - (void)registerCallback:(CDVInvokedUrlCommand *)command {
-    NSLog(@"Registering callback");
-    printf("registering callback");
-
+    NSLog(@"Setting up Capture SDK");
+    _capture = [SKTCaptureHelper sharedInstance];
+    [_capture pushDelegate:self];
+    
     SKTAppInfo* appInfo = [SKTAppInfo new];
     appInfo.AppID = @"ios:app.greenlink.myapplication";
     appInfo.DeveloperID = @"43d33419-e8e6-4ec6-a1f2-c8f9e6b960c8";
     appInfo.AppKey = @"MC0CFQCvXP07sIez0O8JTROYnQ7YaWS+5wIUXnR37wh9vVliGMkxa3Z8S9xeOfs=";
-    SKTCaptureHelper* capture = [SKTCaptureHelper sharedInstance];
-    [capture pushDelegate:self];
-    [capture openWithAppInfo:appInfo completionHandler:^(SKTResult result) {
-    NSLog(@"Opening Capture returns: %ld", result);
+    _capture = [SKTCaptureHelper sharedInstance];
+    [_capture pushDelegate:self];
+    [_capture openWithAppInfo:appInfo completionHandler:^(SKTResult result) {
+        NSLog(@"opening capture returns: %ld", result);
     }];
+    //SKTCaptureHelper* capture = [SKTCaptureHelper sharedInstance];
+    //[capture pushDelegate:self];
+    //[capture openWithAppInfo:appInfo completionHandler:^(SKTResult result) {
+    //NSLog(@"Opening Capture returns: %ld", result);
+    //}];
 
     [self.commandDelegate runInBackground:^{
-        NSLog(@"Registering callback");
-        printf("registering callback");
+        NSLog(@"Registering callback");        
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully registered callback!"];
         dataCallbackId = command.callbackId;        
         [result setKeepCallbackAsBool:YES];
