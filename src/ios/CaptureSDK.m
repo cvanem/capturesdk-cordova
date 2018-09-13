@@ -34,7 +34,7 @@ static NSString *dataCallbackId = nil;
     SKTCaptureHelper* capture = [SKTCaptureHelper sharedInstance];
     [capture pushDelegate:self];
     [capture openWithAppInfo:appInfo completionHandler:^(SKTResult result) {
-    NSLog(@"Opening Capture returns: %ld", result);
+        NSLog(@"Opening Capture returns: %ld", result);
     }];
 }
 
@@ -66,14 +66,13 @@ static NSString *dataCallbackId = nil;
         NSLog(@"Registering callback");
         printf("registering callback");
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully registered callback!"];
-        dataCallbackId = command.callbackId;
-        this.dataCallbackId = command.callbackId;
+        dataCallbackId = command.callbackId;        
         [result setKeepCallbackAsBool:YES];
         NSLog(@"Registered callback");
         [self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];
         [self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];
-        //[self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];
-        //[self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];
+        [self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];
+        [self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];
     }];
 }
 
@@ -82,7 +81,7 @@ static NSString *dataCallbackId = nil;
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully tested callback!"];        
         //dataCallbackId = command.callbackId;
         [result setKeepCallbackAsBool:YES]; 
-        [self.commandDelegate sendPluginResult:result callbackId:this.dataCallbackId];
+        //[self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];
         /*
         NSStringEncoding encoding = NSWindowsCP1252StringEncoding;
         NSString *portName = nil;

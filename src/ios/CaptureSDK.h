@@ -13,6 +13,7 @@
 
 @interface CaptureSDK : CDVPlugin <SKTCaptureHelperDelegate> {
     SKTCaptureHelper* _capture;
+    //NSString *onDataId = nil;    
 }
 
 - (void)viewDidLoad;
