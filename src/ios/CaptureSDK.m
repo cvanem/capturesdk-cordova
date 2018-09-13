@@ -75,7 +75,8 @@ static NSString *dataCallbackId = nil;
 -(void)testCallback:(CDVInvokedUrlCommand *)command {
     [self.commandDelegate runInBackground:^{
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully tested callback!"];        
-        [result setKeepCallbackAsBool:YES];        
+        dataCallbackId = command.callbackId;
+        [result setKeepCallbackAsBool:YES]; 
         [self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];
         /*
         NSStringEncoding encoding = NSWindowsCP1252StringEncoding;
