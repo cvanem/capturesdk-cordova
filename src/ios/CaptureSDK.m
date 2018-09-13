@@ -2,7 +2,7 @@
 //  CaptureSDK.m
 //  
 //
-//  Created by Jose Angarita on 5/17/16.
+//  Created by Chris Van Emmerik on 9/13/18.
 //
 //
 
