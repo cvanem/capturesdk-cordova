@@ -32,7 +32,7 @@ function callbackError(error) {
 }
 
 function onData(data) {
-    alert('onData executing: ' + data);
+    //alert('onData executing: ' + data);
     inAppBrowserRef && inAppBrowserRef.executeScript({ code: "onData(\""+data+"\")" }); // Clear out the command in localStorage for subsequent opens.
 }
 
