@@ -39,7 +39,7 @@ import com.socketmobile.capture.AppKey;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import app.greenlink.myapplication.BuildConfig;
+//import app.greenlink.myapplication.BuildConfig;
 
 public class MainActivity extends CordovaActivity
 {
@@ -58,7 +58,7 @@ public class MainActivity extends CordovaActivity
         loadUrl(launchUrl);
 
         Capture.builder(getApplicationContext())
-        .enableLogging(BuildConfig.DEBUG)
+        //.enableLogging(BuildConfig.DEBUG)
         .build();
     }
 
