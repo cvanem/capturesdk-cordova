@@ -34,7 +34,7 @@ static NSString *dataCallbackId = nil;
     SKTCaptureHelper* capture = [SKTCaptureHelper sharedInstance];
     [capture pushDelegate:self];
     [capture openWithAppInfo:appInfo completionHandler:^(SKTResult result) {
-        NSLog(@"Opening Capture returns: %ld", result);
+        NSLog(@"Opening Capture returns: %ld", result); 
     }];
 }
 
