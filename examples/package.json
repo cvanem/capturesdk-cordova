@@ -38,11 +38,12 @@
       "addcapturesdkfromclone": "cd inappbrowser && cordova plugins add ../capturesdk-cordova",
       "clonerepo": "git clone https://github.com/cvanem/capturesdk-cordova",
       "addinappbrowser": "cd inappbrowser && cordova plugins add cordova-plugin-inappbrowser",
+      "podinstall": "cd inappbrowser && cd platforms && cd ios && pod install",
       "copy": "node copy",
       "clean": "node clean",
       "android": "cd inappbrowser && cordova run android",
       "buildios": "cd inappbrowser && cordova build ios",
-      "ipad": "cd inappbrowser && cordova emulate ios --target='iPad-Pro, 11.4'"
+      "ipad": "yarn podinstall && cd inappbrowser && cordova emulate ios --target='iPad-Pro, 11.4'"
     },
     "author": "Chris Van Emmerik"    
   }
