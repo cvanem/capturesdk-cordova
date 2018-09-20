@@ -8,11 +8,10 @@ git clone https://cvanem/capturesdk-cordova
 
 Example using cordova-plugin-inappbrowser:
 
-Prerequisites:
+Prerequisites:   
     
-    yarn
-    node
-    npm
+    node/npm
+    yarn (npm install -g yarn)
     cordova (npm install -g cordova)
     Android tools: Android Studio/android sdk/jdk
 
