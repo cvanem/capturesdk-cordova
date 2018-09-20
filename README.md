@@ -14,6 +14,7 @@ Prerequisites:
     yarn (npm install -g yarn)
     cordova (npm install -g cordova)
     Android tools: Android Studio/android sdk/jdk
+    cocoapods (For Mac OS: sudo gem install cocoapods)
 
 Open command prompt and navigate to the /examples directory and run the commands:
 
