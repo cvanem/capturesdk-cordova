@@ -60,21 +60,24 @@ var app = {
             console.log('loadstop fired');
             alert('inappbrowser loaded');
             //alert('device: ' + device.cordova);
-
+            
+            console.log('clearing native command');
             inAppBrowserRef.executeScript({ code: "localStorage.setItem( 'nativeCommand', '' );" }); // Clear out the command in localStorage for subsequent opens.
-
+            console.log('cleared native command');
+            console.log('defining resetCommand');
             var resetCommand = function() {
                 inAppBrowserRef.executeScript({
                     code: "localStorage.setItem( 'nativeCommand', '' )"
                 });
-            }
+            }            
+            console.log('defining setStatus');
 
             var setStatus = function(status) {
                 inAppBrowserRef.executeScript({
                     code: "localStorage.setItem( 'nativeCommandStatus', " + status + " )"
                 });
             }
-
+            console.log('done defining, registering callback');
             alert('registering callback');
             capturesdk.registerCallback("All",callbackSuccess,callbackError);
             alert('testing callback');            
