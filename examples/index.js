@@ -25,10 +25,10 @@ var developmentUrl = "https://192.168.1.46:5001";
 var productionUrl = "https://greenlink.app";
 
 function callbackSuccess(result) {
-    alert('success callback: ' + JSON.stringify(result));    
+    console.log('success callback: ' + JSON.stringify(result));    
 }
 function callbackError(error) {
-    alert('error callback: ' + JSON.stringify(error));    
+    console.log('error callback: ' + JSON.stringify(error));    
 }
 
 function onData(data) {
@@ -58,7 +58,7 @@ var app = {
         console.log('done opening, adding loadstop event listner');
         inAppBrowserRef.addEventListener( "loadstop", function() { //Fired when browser is finished loading
             console.log('loadstop fired');
-            alert('inappbrowser loaded');
+            //alert('inappbrowser loaded');
             //alert('device: ' + device.cordova);
             
             console.log('clearing native command');
@@ -78,14 +78,15 @@ var app = {
                 });
             }
             console.log('done defining, registering callback');
-            alert('registering callback');
+            //alert('registering callback');
             capturesdk.registerCallback("All",callbackSuccess,callbackError);
-            alert('testing callback');            
+            //alert('testing callback');            
+            console.log('testing callback');
             capturesdk.testCallback("All",function(result){
-                alert('successfully tested callback: ' + JSON.stringify(result));
+                console.log('successfully tested callback: ' + JSON.stringify(result));
                },
                function(error) {
-                   alert('error testing callback: ' + JSON.stringify(error));
+                   console.log('error testing callback: ' + JSON.stringify(error));
                 }
             );
             
