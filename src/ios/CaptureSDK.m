@@ -55,19 +55,27 @@ static NSString *dataCallbackId = nil;
     [self.commandDelegate runInBackground:^{
         NSLog(@"Registering callback");        
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully registered callback!"];
-        dataCallbackId = command.callbackId;        
+        dataCallbackId = command.callbackId;      
         [result setKeepCallbackAsBool:YES];
         NSLog(@"Registered callback");
+        NSLog(@"Sending register callback result: %ld", dataCallbackId );
         [self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];        
     }];
 }
 
 -(void)testCallback:(CDVInvokedUrlCommand *)command {
+
+    NSLog(@"test Callback Executing");
+    
     [self.commandDelegate runInBackground:^{
-        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully tested callback!"];        
-        //dataCallbackId = command.callbackId;
-        [result setKeepCallbackAsBool:YES]; 
-        //[self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];
+        NSLog(@"test Callback Preparing result");
+        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully registered callback!"];
+        dataCallbackId = command.callbackId;      
+        [result setKeepCallbackAsBool:YES];
+        NSLog(@"Sending test callback result: %ld", dataCallbackId );
+        [self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];        
+
+        
         /*
         NSStringEncoding encoding = NSWindowsCP1252StringEncoding;
         NSString *portName = nil;
