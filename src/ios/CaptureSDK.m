@@ -21,9 +21,11 @@ static NSString *dataCallbackId = nil;
  * or if the SoftScan trigger operation has been cancelled
  */
 -(void)didReceiveDecodedData:(SKTCaptureDecodedData*) decodedData fromDevice:(SKTCaptureHelperDevice*) device withResult:(SKTResult) result{
-    NSLog(@"didReceiveDecodedData");    
+    NSLog(@"didReceiveDecodedData");
     dispatch_async(dispatch_get_main_queue(), ^{        
-        //NSString *text = [[decodedData.stringFromDecodedData componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
+        NSString *text = [[decodedData.stringFromDecodedData componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
+        NSLog(@"decodedData:");
+        NSLog(text);
         /*self.decodedDataText.text =
         [self.decodedDataText.text stringByAppendingString: text];
         self.decodedDataText.text =
@@ -69,11 +71,11 @@ static NSString *dataCallbackId = nil;
     
     [self.commandDelegate runInBackground:^{
         NSLog(@"test Callback Preparing result");
-        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully registered callback!"];
+        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully tested callback!"];
         dataCallbackId = command.callbackId;      
         [result setKeepCallbackAsBool:YES];
         NSLog(@"Sending test callback result: %ld", dataCallbackId );
-        [self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];        
+        [self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];
 
         
         /*
