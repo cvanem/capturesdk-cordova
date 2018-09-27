@@ -47,7 +47,7 @@
       "clean": "node clean",
       "android": "cd inappbrowser && cordova run android",
       "buildios": "cd inappbrowser && cordova build ios",
-      "ipad": "yarn podinstall && cd inappbrowser && cordova emulate ios --target='iPad-Pro, 11.4' --buildFlag='-UseModernBuildSystem=0"
+      "ipad": "yarn podinstall && cd inappbrowser && cordova emulate ios --target='iPad-Pro, 12.0' --buildFlag='-UseModernBuildSystem=0'"
     },
     "author": "Chris Van Emmerik"    
   }
