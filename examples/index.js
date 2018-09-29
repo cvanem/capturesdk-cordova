@@ -25,7 +25,8 @@ var developmentUrl = "https://192.168.1.46:5001";
 var productionUrl = "https://greenlink.app";
 
 function callbackSuccess(result) {
-    console.log('success callback: ' + JSON.stringify(result));    
+    console.log('success callback: ' + JSON.stringify(result));
+    onData(result);
 }
 function callbackError(error) {
     console.log('error callback: ' + JSON.stringify(error));    

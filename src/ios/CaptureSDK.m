@@ -34,13 +34,14 @@ static NSString *dataCallbackId = nil;
 
         [self.commandDelegate runInBackground:^{
         NSLog(@"Receive Decoded Data callback");        
-        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Received Decoded Data!"];
-        //dataCallbackId = command.callbackId;      
+        //CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Received Decoded Data!"];
+        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:text];
+        //dataCallbackId = command.callbackId;
         [result setKeepCallbackAsBool:YES];        
         NSLog(@"Sending decoded data result %s to callbackid: %ld", text, dataCallbackId );
-        [self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];        
+        [self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];
         }];
-        
+
     });
 }
 
