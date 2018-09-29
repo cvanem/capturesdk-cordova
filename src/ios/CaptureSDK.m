@@ -24,18 +24,23 @@ static NSString *dataCallbackId = nil;
     NSLog(@"didReceiveDecodedData");
     dispatch_async(dispatch_get_main_queue(), ^{        
         NSString *text = [[decodedData.stringFromDecodedData componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
-        NSLog(@"decodedData:");
+        
+        NSLog(@"decodedData text:");
         NSLog(text);
+        NSLog(@"decodedData:");
+        NSLog(decodedData.DecodedData);
         /*self.decodedDataText.text =
         [self.decodedDataText.text stringByAppendingString: text];
         self.decodedDataText.text =
         [self.decodedDataText.text stringByAppendingString: @"\r\n"];
-        */
+        */  
+        //DecodedData.DecodedData
 
         [self.commandDelegate runInBackground:^{
         NSLog(@"Receive Decoded Data callback");        
         //CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Received Decoded Data!"];
-        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:text];
+        //CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:text];
+        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArrayBuffer:decodedData.DecodedData];        
         //dataCallbackId = command.callbackId;
         [result setKeepCallbackAsBool:YES];        
         NSLog(@"Sending decoded data result %s to callbackid: %ld", text, dataCallbackId );
