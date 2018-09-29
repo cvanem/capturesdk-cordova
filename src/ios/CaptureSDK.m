@@ -31,6 +31,16 @@ static NSString *dataCallbackId = nil;
         self.decodedDataText.text =
         [self.decodedDataText.text stringByAppendingString: @"\r\n"];
         */
+
+        [self.commandDelegate runInBackground:^{
+        NSLog(@"Receive Decoded Data callback");        
+        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Received Decoded Data!"];
+        //dataCallbackId = command.callbackId;      
+        [result setKeepCallbackAsBool:YES];        
+        NSLog(@"Sending decoded data result %s to callbackid: %ld", text, dataCallbackId );
+        [self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];        
+        }];
+        
     });
 }
 
@@ -72,7 +82,7 @@ static NSString *dataCallbackId = nil;
     [self.commandDelegate runInBackground:^{
         NSLog(@"test Callback Preparing result");
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully tested callback!"];
-        dataCallbackId = command.callbackId;      
+        //dataCallbackId = command.callbackId;      
         [result setKeepCallbackAsBool:YES];
         NSLog(@"Sending test callback result: %ld", dataCallbackId );
         [self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];
