@@ -27,8 +27,8 @@ static NSString *dataCallbackId = nil;
         
         NSLog(@"decodedData text:");
         NSLog(text);
-        NSLog(@"decodedData:");
-        NSLog(decodedData.DecodedData);
+        //NSLog(@"decodedData:");
+        //NSLog(decodedData.DecodedData);
         /*self.decodedDataText.text =
         [self.decodedDataText.text stringByAppendingString: text];
         self.decodedDataText.text =

@@ -29,7 +29,7 @@ function callbackSuccess(result) {
     //convert the ArrayBuffer to a base64 encoded string so we can send it to the browser
     let base64String = btoa(String.fromCharCode(...new Uint8Array(result)));
     console.log('success callback base64: ' + base64String);
-    onData(result);
+    onData(base64String);
 }
 function callbackError(error) {
     console.log('error callback: ' + JSON.stringify(error));    
