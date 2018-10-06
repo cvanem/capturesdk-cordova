@@ -25,8 +25,8 @@ static NSString *dataCallbackId = nil;
     dispatch_async(dispatch_get_main_queue(), ^{        
         NSString *text = [[decodedData.stringFromDecodedData componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
         
-        NSLog(@"decodedData text:");
-        NSLog(text);
+        //NSLog(@"decodedData text:");
+        //NSLog(text);
         //NSLog(@"decodedData:");
         //NSLog(decodedData.DecodedData);
         /*self.decodedDataText.text =
