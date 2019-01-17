@@ -42,3 +42,5 @@ To change the app key or developer id, you can insert your APP_KEY and DEVELOPER
             <meta-data android:name="com.socketmobile.capture.DEVELOPER_ID" android:value="..."/>
         </config-file>
     </platform>
+
+For IOS, update the CaptureSDK.m file with the new key information.
