@@ -56,14 +56,15 @@ static NSString *dataCallbackId = nil;
     [_capture pushDelegate:self];
 
     SKTAppInfo* appInfo = [SKTAppInfo new];
-    appInfo.AppID = @"ios:app.greenlink.cordova";
+    appInfo.AppID = @"ios:greenlink.web.app";
     appInfo.DeveloperID = @"43d33419-e8e6-4ec6-a1f2-c8f9e6b960c8";
-    appInfo.AppKey = @"MCwCFEbasc6tNWT3Z6tJAXgvTJvlhYp0AhQEJE6LFqI9CchefXg9CAJVfydjnQ==";
+    appInfo.AppKey = @"MC4CFQD290HRj0qh7xekM0hYWhCuxyzelAIVAIgDtGLwZvYcf6IrALgsfJeTSq6b";
     SKTCaptureHelper* capture = [SKTCaptureHelper sharedInstance];
     [capture pushDelegate:self];
     [capture openWithAppInfo:appInfo completionHandler:^(SKTResult result) {
     NSLog(@"Opening Capture returns: %ld", result);
     }];
+
     //SKTCaptureHelper* capture = [SKTCaptureHelper sharedInstance];
     //[capture pushDelegate:self];
     //[capture openWithAppInfo:appInfo completionHandler:^(SKTResult result) {
