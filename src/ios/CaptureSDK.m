@@ -12,6 +12,41 @@
 static NSString *dataCallbackId = nil;
 
 #pragma mark - SKTCaptureHelper delegate
+
+
+/**
+ * called when a error needs to be reported to the application
+ *
+ * @param error contains the error code
+ * @param message contains an optional message, can be null
+ */
+-(void)didReceiveError:(SKTResult) error withMessage:(NSString*) message{    
+    NSLog(@"didReceiveError %ld with message: %@", error, message);
+}
+
+/**
+ * called when a device has connected to the host
+ *
+ * @param device identifies the device that just connected
+ * @param result contains an error if something went wrong during the device connection
+ */
+-(void)didNotifyArrivalForDevice:(SKTCaptureHelperDevice*) device withResult:(SKTResult) result{
+    NSLog(@"didNotifyArrivalForDevice");
+    //Notification that device has connected, tehn gets the device list and then updates the status
+    //[self updateStatusFromDevices:[_capture getDevicesList]];
+}
+
+/**
+ * called when a device has disconnected from the host
+ *
+ * @param device identifies the device that has just disconnected
+ * @param result contains an error if something went wrong during the device disconnection
+ */
+-(void)didNotifyRemovalForDevice:(SKTCaptureHelperDevice*) device withResult:(SKTResult) result{
+    NSLog(@"didNotifyRemovalForDevice");
+    //[self updateStatusFromDevices:[_capture getDevicesList]];
+}
+
 /**
  * called when decoded data are received from a device
  *
