@@ -39,7 +39,7 @@ static NSString *removalCallbackId= nil;
     NSString *text = [self getStatusFromDevices:[_capture getDevicesList]];
         
     [self.commandDelegate runInBackground:^{        
-        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:text];                
+        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:text];
         NSLog(@"Sending status: %@, callbackid: %ld", text, dataCallbackId );
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
     }];
@@ -57,7 +57,7 @@ static NSString *removalCallbackId= nil;
         [self.commandDelegate runInBackground:^{
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:message];
         [result setKeepCallbackAsBool:YES];        
-        NSLog(@"Calling error callback.  Message: %@, callbackid: %ld", message, errorCallbackId );
+        //NSLog(@"Calling error callback.  Message: %@, callbackid: %ld", message, errorCallbackId );
         [self.commandDelegate sendPluginResult:result callbackId: errorCallbackId];
         }];
     });
@@ -80,7 +80,7 @@ static NSString *removalCallbackId= nil;
         [self.commandDelegate runInBackground:^{
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:text];
         [result setKeepCallbackAsBool:YES];        
-        NSLog(@"Calling arrival callback.  Status: %@, callbackid: %ld", text, arrivalCallbackId );
+        //NSLog(@"Calling arrival callback.  Status: %@, callbackid: %ld", text, arrivalCallbackId );
         [self.commandDelegate sendPluginResult:result callbackId: arrivalCallbackId];
         }];
     });
@@ -103,7 +103,7 @@ static NSString *removalCallbackId= nil;
         [self.commandDelegate runInBackground:^{        
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:text];
         [result setKeepCallbackAsBool:YES];        
-        NSLog(@"Calling removal callback.  Status: %@, callbackid: %ld", text, removalCallbackId );
+        //NSLog(@"Calling removal callback.  Status: %@, callbackid: %ld", text, removalCallbackId );
         [self.commandDelegate sendPluginResult:result callbackId:removalCallbackId];
         }];
     });
@@ -147,22 +147,14 @@ static NSString *removalCallbackId= nil;
     SKTCaptureHelper* capture = [SKTCaptureHelper sharedInstance];
     [capture pushDelegate:self];
     [capture openWithAppInfo:appInfo completionHandler:^(SKTResult result) {
-    NSLog(@"Opening Capture returns: %ld", result);
-    }];
+        NSLog(@"Opening Capture returns: %ld", result);
+    }];    
 
-    //SKTCaptureHelper* capture = [SKTCaptureHelper sharedInstance];
-    //[capture pushDelegate:self];
-    //[capture openWithAppInfo:appInfo completionHandler:^(SKTResult result) {
-    //NSLog(@"Opening Capture returns: %ld", result);
-    //}];
-
-    [self.commandDelegate runInBackground:^{
-        NSLog(@"Registering callback");
+    [self.commandDelegate runInBackground:^{        
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully registered callback!"];
         dataCallbackId = command.callbackId;
         [result setKeepCallbackAsBool:YES];
-        NSLog(@"Registered callback");
-        NSLog(@"Sending register callback result: %ld", dataCallbackId );
+        NSLog(@"Registered CaptureSDK Callback");        
         [self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];
     }];
 }
@@ -172,8 +164,7 @@ static NSString *removalCallbackId= nil;
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully registered callback!"];
         errorCallbackId = command.callbackId;
         [result setKeepCallbackAsBool:YES];
-        NSLog(@"Registered error callback");
-        NSLog(@"Sending register callback result: %ld", errorCallbackId );
+        NSLog(@"Registered CaptureSDK Error Callback");
         [self.commandDelegate sendPluginResult:result callbackId:errorCallbackId];
     }];
 }
@@ -182,9 +173,8 @@ static NSString *removalCallbackId= nil;
     [self.commandDelegate runInBackground:^{
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully registered callback!"];
         removalCallbackId = command.callbackId;
-        [result setKeepCallbackAsBool:YES];
-        NSLog(@"Registered removal callback");
-        NSLog(@"Sending register callback result: %ld", errorCallbackId );
+        [result setKeepCallbackAsBool:YES];        
+        NSLog(@"Registered CaptureSDK Removal Callback");
         [self.commandDelegate sendPluginResult:result callbackId:errorCallbackId];
     }];
 }
@@ -194,19 +184,16 @@ static NSString *removalCallbackId= nil;
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully registered callback!"];
         arrivalCallbackId = command.callbackId;
         [result setKeepCallbackAsBool:YES];
-        NSLog(@"Registered arrival callback");
-        NSLog(@"Sending register callback result: %ld", errorCallbackId );
-        [self.commandDelegate sendPluginResult:result callbackId:errorCallbackId];
+        NSLog(@"Registered CaptureSDK Arrival Callback");
+        [self.commandDelegate sendPluginResult:result callbackId:arrivalCallbackId];
     }];
 }
 
--(void)testCallback:(CDVInvokedUrlCommand *)command {
-    NSLog(@"test Callback Executing");
-    [self.commandDelegate runInBackground:^{
-        NSLog(@"test Callback Preparing result");
+-(void)testCallback:(CDVInvokedUrlCommand *)command {    
+    [self.commandDelegate runInBackground:^{        
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully tested callback!"];
         [result setKeepCallbackAsBool:YES];
-        NSLog(@"Sending test callback result: %ld", dataCallbackId );
+        NSLog(@"Executing CapureSDK Test Callback, id: %ld", dataCallbackId );
         [self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];
     }];
 }
