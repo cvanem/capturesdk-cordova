@@ -30,7 +30,7 @@ static NSString *removalCallbackId= nil;
     return status;
 }
 
-(void)getStatus:(CDVInvokedUrlCommand *)command {
+-(void)getStatus:(CDVInvokedUrlCommand *)command {
     NSLog(@"Getting Capture SDK Status");    
     _capture = [SKTCaptureHelper sharedInstance];
     [_capture pushDelegate:self];        
