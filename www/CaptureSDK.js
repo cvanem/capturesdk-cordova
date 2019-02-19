@@ -9,7 +9,7 @@ module.exports = {
     testCallback: function(type, success, error) {
         exec(success, error, "CaptureSDK", "testCallback", [type]);
     },
-    
+
     //iOS only functions
     registerErrorCallback: function(type, success, error) {
         exec(success, error, "CaptureSDK", "registerErrorCallback", [type]);
@@ -19,6 +19,10 @@ module.exports = {
     },
     registerArrivalCallback: function(type, success, error) {
         exec(success, error, "CaptureSDK", "registerArrivalCallback", [type]);
+    },
+
+    getStatus: function(type, success, error) {
+        exec(success, error, "CaptureSDK", "getStatus", [type]);
     },
 
 };

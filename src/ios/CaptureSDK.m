@@ -30,6 +30,21 @@ static NSString *removalCallbackId= nil;
     return status;
 }
 
+(void)getStatus:(CDVInvokedUrlCommand *)command {
+    NSLog(@"Getting Capture SDK Status");    
+    _capture = [SKTCaptureHelper sharedInstance];
+    [_capture pushDelegate:self];        
+    SKTCaptureHelper* capture = [SKTCaptureHelper sharedInstance];
+    [capture pushDelegate:self];        
+    NSString *text = [self getStatusFromDevices:[_capture getDevicesList]];
+        
+    [self.commandDelegate runInBackground:^{        
+        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:text];                
+        NSLog(@"Sending status: %s, callbackid: %ld", text, dataCallbackId );
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+    }];
+}
+
 /**
  * called when a error needs to be reported to the application
  *
