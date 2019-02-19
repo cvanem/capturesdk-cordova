@@ -16,7 +16,6 @@ static NSString *removalCallbackId= nil;
 
 #pragma mark - SKTCaptureHelper delegate
 
-
 #pragma mark - Utilities
 -(NSString*)getStatusFromDevices:(NSArray*)devices {
     NSString* status = @"";

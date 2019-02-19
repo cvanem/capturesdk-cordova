@@ -12,11 +12,9 @@
 #import <Cordova/CDV.h>
 
 @interface CaptureSDK : CDVPlugin <SKTCaptureHelperDelegate> {
-    SKTCaptureHelper* _capture;
-    //NSString *onDataId = nil;    
+    SKTCaptureHelper* _capture;    
 }
 
-- (void)viewDidLoad;
 - (void)registerCallback:(CDVInvokedUrlCommand *)command;
 - (void)registerErrorCallback:(CDVInvokedUrlCommand *)command;
 - (void)registerArrivalCallback:(CDVInvokedUrlCommand *)command;
