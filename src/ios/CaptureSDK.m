@@ -38,7 +38,7 @@ static NSString *removalCallbackId= nil;
     [self.commandDelegate runInBackground:^{        
         NSString *text = [self getStatusFromDevices:[_capture getDevicesList]];
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:text];
-        NSLog(@"Sending status: %@, callbackid: %ld", text, dataCallbackId );
+        NSLog(@"Sending Capture SDK Status: %@, callbackid: %ld", text, dataCallbackId );
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
     }];
 }
