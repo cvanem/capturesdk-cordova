@@ -22,5 +22,6 @@
 - (void)registerArrivalCallback:(CDVInvokedUrlCommand *)command;
 - (void)registerRemovalCallback:(CDVInvokedUrlCommand *)command;
 - (void)testCallback:(CDVInvokedUrlCommand *)command;
+- (void)getStatus:(CDVInvokedUrlCommand *)command;
 
 @end
