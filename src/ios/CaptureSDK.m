@@ -23,7 +23,7 @@ static NSString *removalCallbackId= nil;
         status = [NSString stringWithFormat:@"%@ %@", status, device.friendlyName];
     }
     if(status.length == 0){
-        status = @"No device connected";
+        status = @"No devices connected";
     }
     //self.status.text = status;
     return status;
@@ -35,9 +35,8 @@ static NSString *removalCallbackId= nil;
     [_capture pushDelegate:self];        
     SKTCaptureHelper* capture = [SKTCaptureHelper sharedInstance];
     [capture pushDelegate:self];        
-    NSString *text = [self getStatusFromDevices:[_capture getDevicesList]];
-        
     [self.commandDelegate runInBackground:^{        
+        NSString *text = [self getStatusFromDevices:[_capture getDevicesList]];
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:text];
         NSLog(@"Sending status: %@, callbackid: %ld", text, dataCallbackId );
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
