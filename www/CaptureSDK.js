@@ -21,8 +21,8 @@ module.exports = {
         exec(success, error, "CaptureSDK", "registerArrivalCallback", [type]);
     },
 
-    getStatus: function(type, success, error) {
-        exec(success, error, "CaptureSDK", "getStatus", [type]);
+    getStatus: function(success, error) {
+        exec(success, error, "CaptureSDK", "getStatus");
     },
 
 };
