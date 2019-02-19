@@ -18,6 +18,9 @@
 
 - (void)viewDidLoad;
 - (void)registerCallback:(CDVInvokedUrlCommand *)command;
+- (void)registerErrorCallback:(CDVInvokedUrlCommand *)command;
+- (void)registerArrivalCallback:(CDVInvokedUrlCommand *)command;
+- (void)registerRemovalCallback:(CDVInvokedUrlCommand *)command;
 - (void)testCallback:(CDVInvokedUrlCommand *)command;
 
 @end

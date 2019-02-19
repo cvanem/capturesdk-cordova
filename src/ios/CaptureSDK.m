@@ -1,6 +1,6 @@
 //
 //  CaptureSDK.m
-//  
+//
 //
 //  Created by Chris Van Emmerik on 9/13/18.
 //
@@ -10,9 +10,25 @@
 
 @implementation CaptureSDK
 static NSString *dataCallbackId = nil;
+static NSString *errorCallbackId = nil;
+static NSString *arrivalCallbackId = nil;
+static NSString *removalCallbackId= nil;
 
 #pragma mark - SKTCaptureHelper delegate
 
+
+#pragma mark - Utilities
+-(NSString*)getStatusFromDevices:(NSArray*)devices {
+    NSString* status = @"";
+    for(SKTCaptureHelperDevice* device in devices){
+        status = [NSString stringWithFormat:@"%@ %@", status, device.friendlyName];
+    }
+    if(status.length == 0){
+        status = @"No device connected";
+    }
+    //self.status.text = status;
+    return status;
+}
 
 /**
  * called when a error needs to be reported to the application
@@ -20,8 +36,16 @@ static NSString *dataCallbackId = nil;
  * @param error contains the error code
  * @param message contains an optional message, can be null
  */
--(void)didReceiveError:(SKTResult) error withMessage:(NSString*) message{    
-    NSLog(@"didReceiveError %ld with message: %@", error, message);
+-(void)didReceiveError:(SKTResult) error withMessage:(NSString*) message{
+    NSLog(@"didReceiveError %ld with message: %@", error, message);    
+    dispatch_async(dispatch_get_main_queue(), ^{        
+        [self.commandDelegate runInBackground:^{
+        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:message];
+        [result setKeepCallbackAsBool:YES];        
+        NSLog(@"Calling error callback.  Message: %s, callbackid: %ld", message, errorCallbackId );
+        [self.commandDelegate sendPluginResult:result callbackId: errorCallbackId];
+        }];
+    });
 }
 
 /**
@@ -31,9 +55,20 @@ static NSString *dataCallbackId = nil;
  * @param result contains an error if something went wrong during the device connection
  */
 -(void)didNotifyArrivalForDevice:(SKTCaptureHelperDevice*) device withResult:(SKTResult) result{
-    NSLog(@"didNotifyArrivalForDevice");
-    //Notification that device has connected, tehn gets the device list and then updates the status
-    //[self updateStatusFromDevices:[_capture getDevicesList]];
+    NSLog(@"didNotifyArrivalForDevice");            
+    _capture = [SKTCaptureHelper sharedInstance];
+    [_capture pushDelegate:self];        
+    SKTCaptureHelper* capture = [SKTCaptureHelper sharedInstance];
+    [capture pushDelegate:self];        
+    NSString *text = [self getStatusFromDevices:[_capture getDevicesList]];
+    dispatch_async(dispatch_get_main_queue(), ^{        
+        [self.commandDelegate runInBackground:^{
+        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:text];
+        [result setKeepCallbackAsBool:YES];        
+        NSLog(@"Calling arrival callback.  Status: %s, callbackid: %ld", text, arrivalCallbackId );
+        [self.commandDelegate sendPluginResult:result callbackId: arrivalCallbackId];
+        }];
+    });
 }
 
 /**
@@ -43,8 +78,20 @@ static NSString *dataCallbackId = nil;
  * @param result contains an error if something went wrong during the device disconnection
  */
 -(void)didNotifyRemovalForDevice:(SKTCaptureHelperDevice*) device withResult:(SKTResult) result{
-    NSLog(@"didNotifyRemovalForDevice");
-    //[self updateStatusFromDevices:[_capture getDevicesList]];
+    NSLog(@"didNotifyRemovalForDevice");    
+    _capture = [SKTCaptureHelper sharedInstance];
+    [_capture pushDelegate:self];        
+    SKTCaptureHelper* capture = [SKTCaptureHelper sharedInstance];
+    [capture pushDelegate:self];        
+    NSString *text = [self getStatusFromDevices:[_capture getDevicesList]];
+    dispatch_async(dispatch_get_main_queue(), ^{        
+        [self.commandDelegate runInBackground:^{        
+        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:text];
+        [result setKeepCallbackAsBool:YES];        
+        NSLog(@"Calling removal callback.  Status: %s, callbackid: %ld", text, removalCallbackId );
+        [self.commandDelegate sendPluginResult:result callbackId:removalCallbackId];
+        }];
+    });
 }
 
 /**
@@ -57,27 +104,15 @@ static NSString *dataCallbackId = nil;
  */
 -(void)didReceiveDecodedData:(SKTCaptureDecodedData*) decodedData fromDevice:(SKTCaptureHelperDevice*) device withResult:(SKTResult) result{
     NSLog(@"didReceiveDecodedData");
-    dispatch_async(dispatch_get_main_queue(), ^{        
+    dispatch_async(dispatch_get_main_queue(), ^{
         NSString *text = [[decodedData.stringFromDecodedData componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
-        
-        //NSLog(@"decodedData text:");
-        //NSLog(text);
-        //NSLog(@"decodedData:");
-        //NSLog(decodedData.DecodedData);
-        /*self.decodedDataText.text =
-        [self.decodedDataText.text stringByAppendingString: text];
-        self.decodedDataText.text =
-        [self.decodedDataText.text stringByAppendingString: @"\r\n"];
-        */  
-        //DecodedData.DecodedData
-
         [self.commandDelegate runInBackground:^{
-        NSLog(@"Receive Decoded Data callback");        
+        NSLog(@"Receive Decoded Data callback");
         //CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Received Decoded Data!"];
         //CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:text];
-        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArrayBuffer:decodedData.DecodedData];        
+        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArrayBuffer:decodedData.DecodedData];
         //dataCallbackId = command.callbackId;
-        [result setKeepCallbackAsBool:YES];        
+        [result setKeepCallbackAsBool:YES];
         NSLog(@"Sending decoded data result %s to callbackid: %ld", text, dataCallbackId );
         [self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];
         }];
@@ -107,81 +142,57 @@ static NSString *dataCallbackId = nil;
     //}];
 
     [self.commandDelegate runInBackground:^{
-        NSLog(@"Registering callback");        
+        NSLog(@"Registering callback");
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully registered callback!"];
-        dataCallbackId = command.callbackId;      
+        dataCallbackId = command.callbackId;
         [result setKeepCallbackAsBool:YES];
         NSLog(@"Registered callback");
         NSLog(@"Sending register callback result: %ld", dataCallbackId );
-        [self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];        
+        [self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];
+    }];
+}
+
+- (void)registerErrorCallback:(CDVInvokedUrlCommand *)command {
+    [self.commandDelegate runInBackground:^{
+        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully registered callback!"];
+        dataCallbackId = command.callbackId;
+        [result setKeepCallbackAsBool:YES];
+        NSLog(@"Registered error callback");
+        NSLog(@"Sending register callback result: %ld", errorCallbackId );
+        [self.commandDelegate sendPluginResult:result callbackId:errorCallbackId];
+    }];
+}
+
+- (void)registerRemovalCallback:(CDVInvokedUrlCommand *)command {
+    [self.commandDelegate runInBackground:^{
+        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully registered callback!"];
+        dataCallbackId = command.callbackId;
+        [result setKeepCallbackAsBool:YES];
+        NSLog(@"Registered removal callback");
+        NSLog(@"Sending register callback result: %ld", errorCallbackId );
+        [self.commandDelegate sendPluginResult:result callbackId:errorCallbackId];
+    }];
+}
+
+- (void)registerArrivalCallback:(CDVInvokedUrlCommand *)command {
+    [self.commandDelegate runInBackground:^{
+        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully registered callback!"];
+        dataCallbackId = command.callbackId;
+        [result setKeepCallbackAsBool:YES];
+        NSLog(@"Registered arrival callback");
+        NSLog(@"Sending register callback result: %ld", errorCallbackId );
+        [self.commandDelegate sendPluginResult:result callbackId:errorCallbackId];
     }];
 }
 
 -(void)testCallback:(CDVInvokedUrlCommand *)command {
-
     NSLog(@"test Callback Executing");
-    
     [self.commandDelegate runInBackground:^{
         NSLog(@"test Callback Preparing result");
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully tested callback!"];
-        //dataCallbackId = command.callbackId;      
         [result setKeepCallbackAsBool:YES];
         NSLog(@"Sending test callback result: %ld", dataCallbackId );
         [self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];
-
-        
-        /*
-        NSStringEncoding encoding = NSWindowsCP1252StringEncoding;
-        NSString *portName = nil;
-        NSString *emulation = nil;
-        NSDictionary *printObj = nil;
-        
-  
-        if (command.arguments.count > 0) {
-            portName = [command.arguments objectAtIndex:0];
-            emulation = [command.arguments objectAtIndex:1];
-            printObj = [command.arguments objectAtIndex:2];
-        };
-        
-        NSString *portSettings = [self getPortSettingsOption:emulation];
-        NSString *text = [printObj valueForKey:@"text"];
-        BOOL cutReceipt = ([printObj valueForKey:@"cutReceipt"]) ? YES : NO;
-        BOOL openCashDrawer = ([printObj valueForKey:@"openCashDrawer"]) ? YES : NO;
-        StarIoExtEmulation Emulation = [self getEmulation:emulation];
-        
-        
-        ISCBBuilder *builder = [StarIoExt createCommandBuilder:Emulation];
-        
-        [builder beginDocument];
-        
-        [builder appendData:[text dataUsingEncoding:encoding]];
-        
-        if(cutReceipt == YES){
-            [builder appendCutPaper:SCBCutPaperActionPartialCutWithFeed];
-        }
-        
-        if(openCashDrawer == YES){
-            [builder appendPeripheral:SCBPeripheralChannelNo1];
-            [builder appendPeripheral:SCBPeripheralChannelNo2];
-        }
-        
-        [builder endDocument];
-
-        if(portName != nil && portName != (id)[NSNull null]){
-            
-                [self sendCommand:[builder.commands copy]
-                         portName:portName
-                     portSettings:portSettings
-                          timeout:10000
-                       callbackId:command.callbackId];
-            
-            }else{ //Use StarIOExtManager and send command to connected printer
-                
-            [self sendCommand:[builder.commands copy]
-                   callbackId:command.callbackId];
-                
-        }
-        */
     }];
 }
 @end

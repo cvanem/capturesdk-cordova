@@ -32,7 +32,7 @@
       "build": "yarn createcordova && yarn addandroid && yarn addios && yarn addcapturesdk && yarn addwebview && yarn addwebviewengine && yarn adddeviceplugin && yarn copy",
       "buildfromcloneold": "yarn createcordova && yarn addandroid && yarn addios && yarn addcapturesdkfromclone && yarn addinappbrowser && yarn copy",
       "buildfromclone": "yarn createcordova && yarn addandroid && yarn addios && yarn addcapturesdkfromclone && yarn addwebview && yarn addwebviewengine && yarn copy",
-      "createcordova": "cordova create inappbrowser app.greenlink.cordova inappbrowser",
+      "createcordova": "cordova create inappbrowser greenlink.web.app inappbrowser",
       "addandroid": "cd inappbrowser && cordova platform add android@6.4",
       "addios": "cd inappbrowser && cordova platform add ios",
       "adddeviceplugin": "cd inappbrowser && cordova plugins add cordova-plugin-device",
