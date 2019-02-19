@@ -40,7 +40,7 @@ static NSString *removalCallbackId= nil;
         
     [self.commandDelegate runInBackground:^{        
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:text];                
-        NSLog(@"Sending status: %s, callbackid: %ld", text, dataCallbackId );
+        NSLog(@"Sending status: %@, callbackid: %ld", text, dataCallbackId );
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
     }];
 }
@@ -57,7 +57,7 @@ static NSString *removalCallbackId= nil;
         [self.commandDelegate runInBackground:^{
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:message];
         [result setKeepCallbackAsBool:YES];        
-        NSLog(@"Calling error callback.  Message: %s, callbackid: %ld", message, errorCallbackId );
+        NSLog(@"Calling error callback.  Message: %@, callbackid: %ld", message, errorCallbackId );
         [self.commandDelegate sendPluginResult:result callbackId: errorCallbackId];
         }];
     });
@@ -80,7 +80,7 @@ static NSString *removalCallbackId= nil;
         [self.commandDelegate runInBackground:^{
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:text];
         [result setKeepCallbackAsBool:YES];        
-        NSLog(@"Calling arrival callback.  Status: %s, callbackid: %ld", text, arrivalCallbackId );
+        NSLog(@"Calling arrival callback.  Status: %@, callbackid: %ld", text, arrivalCallbackId );
         [self.commandDelegate sendPluginResult:result callbackId: arrivalCallbackId];
         }];
     });
@@ -103,7 +103,7 @@ static NSString *removalCallbackId= nil;
         [self.commandDelegate runInBackground:^{        
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:text];
         [result setKeepCallbackAsBool:YES];        
-        NSLog(@"Calling removal callback.  Status: %s, callbackid: %ld", text, removalCallbackId );
+        NSLog(@"Calling removal callback.  Status: %@, callbackid: %ld", text, removalCallbackId );
         [self.commandDelegate sendPluginResult:result callbackId:removalCallbackId];
         }];
     });
@@ -128,7 +128,7 @@ static NSString *removalCallbackId= nil;
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArrayBuffer:decodedData.DecodedData];
         //dataCallbackId = command.callbackId;
         [result setKeepCallbackAsBool:YES];
-        NSLog(@"Sending decoded data result %s to callbackid: %ld", text, dataCallbackId );
+        NSLog(@"Sending decoded data to callbackid: %ld", dataCallbackId );
         [self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];
         }];
 
