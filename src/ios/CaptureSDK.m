@@ -170,7 +170,7 @@ static NSString *removalCallbackId= nil;
 - (void)registerErrorCallback:(CDVInvokedUrlCommand *)command {
     [self.commandDelegate runInBackground:^{
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully registered callback!"];
-        dataCallbackId = command.callbackId;
+        errorCallbackId = command.callbackId;
         [result setKeepCallbackAsBool:YES];
         NSLog(@"Registered error callback");
         NSLog(@"Sending register callback result: %ld", errorCallbackId );
@@ -181,7 +181,7 @@ static NSString *removalCallbackId= nil;
 - (void)registerRemovalCallback:(CDVInvokedUrlCommand *)command {
     [self.commandDelegate runInBackground:^{
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully registered callback!"];
-        dataCallbackId = command.callbackId;
+        removalCallbackId = command.callbackId;
         [result setKeepCallbackAsBool:YES];
         NSLog(@"Registered removal callback");
         NSLog(@"Sending register callback result: %ld", errorCallbackId );
@@ -192,7 +192,7 @@ static NSString *removalCallbackId= nil;
 - (void)registerArrivalCallback:(CDVInvokedUrlCommand *)command {
     [self.commandDelegate runInBackground:^{
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully registered callback!"];
-        dataCallbackId = command.callbackId;
+        arrivalCallbackId = command.callbackId;
         [result setKeepCallbackAsBool:YES];
         NSLog(@"Registered arrival callback");
         NSLog(@"Sending register callback result: %ld", errorCallbackId );
